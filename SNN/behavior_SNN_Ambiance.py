@@ -7,6 +7,7 @@ from brian2 import *
 from std_msgs.msg import String
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+from matplotlib.backend.backend_gtkcairo import FigureCanvasGTKCairo as FigureCanvas
 
 
 rospy.init_node('node_spiking_neural_networks', anonymous=True)
@@ -34,27 +35,22 @@ NB_COLONNES = CHUNK
 N = NB_LIGNES * NB_COLONNES
 
 rospy.set_param("no_frame_SNN", 1)
-
-def plotSignalSonore():
-    # Tuto: matplotlib.org/users/beginner.html
-    #plt.plot([1,2,3,4])
-    plt.plot(frames)
-    plt.ylabel('Spectre sonore')
-    plt.show()
   
-def animate(i):
-    line.set_ydata(statemon.v[neurone])
+def animate(num, data, line):
+    line.set_ydata(statemon.v[0])
     return line
-    
-def init():
-    line.set_ydata(statemon.v[neurone])
-    return line  
-  
+     
 def plotAnimationVoltTemps(statemon):
     neurone = 0
     fig = plt.plot(statemon.t/ms, statemon.v[neurone])
-    
-    ani = animation.FuncAnimation(fig, animate, 20, init_func=init, interval=25, blit=False)
+    #ani = animation.FuncAnimation(fig, animate, interval=25)
+    plt.show()
+
+def plotSignalSonore():
+    # Tuto: matplotlib.org/users/beginner.html
+    plt.plot([1,2,3,4,5])
+    plt.plot(frames)
+    plt.ylabel('Signal sonore')
     plt.show()
   
 def plotVoltTemps(statemon):
@@ -218,8 +214,8 @@ def SNN():
         rospy.loginfo("Assignation des moniteurs")    
     statemon = StateMonitor(InputGroup, 'v', record=0)
     stateOutput = StateMonitor(OutputGroup, 'v', record=True)
-    spikemon = SpikeMonitor(OutputGroup)
-    popratemon = PopulationRateMonitor(HiddenGroup1)
+    spikemon = SpikeMonitor(InputGroup)
+    popratemon = PopulationRateMonitor(OutputGroup)
     
     if verbose:
             rospy.loginfo("Stockage du SNN initialise.")
@@ -227,6 +223,8 @@ def SNN():
         store("Initialized", "Initialised.dat")
     if mode == TEST:
         restore("After_learning", "After_learning.dat")
+    
+    plotAnimationVoltTemps(statemon)    
     
     learningNo = 1
     while True: 
@@ -308,8 +306,7 @@ def SNN():
         #plotSignalSonore()
         #echantillonFrames()
         #plotVoltTemps(statemon)
-        plotSpikeTemps(spikemon)
-        #plotAnimationVoltTemps(statemon)
+        #plotSpikeTemps(spikemon)
         #plotConnectivity(S)
         #plotPopulationRate(popratemon)
         #plotOutputNeurons(stateOutput)
