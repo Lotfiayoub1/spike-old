@@ -39,8 +39,8 @@ rospy.init_node('node_saisie_son_ambiant', anonymous=True)
 rospy.loginfo("Behavior_saisie_son_ambiant")
 
 if mode == ROS or mode == ROSBAG:
-    topic_son_ambiant = rospy.Publisher('topic_in_SNN_Son528Hz', String, queue_size=100)
-    #topic_son_ambiant = rospy.Publisher('topic_in_SNN_Ambiance', String, queue_size=100)
+    #topic_son_ambiant = rospy.Publisher('topic_in_SNN_Son528Hz', String, queue_size=100)
+    topic_son_ambiant = rospy.Publisher('topic_son', String, queue_size=100)
 
 frames = []
 
