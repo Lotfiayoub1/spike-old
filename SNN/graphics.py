@@ -19,7 +19,7 @@ def displaySpikeMonitorInfo(spikeMonitor):
     #    print "spike: " + str(j) + " " + str(spikeMonitor.count[j])
 
 def plotVoltTemps(statemon, debut, fin):
-    title("Voltage des neurones ENTREES fonction du temps (Neurones de " + str(debut) + " a " + str(fin) + ")")
+    title("Difference de potentiel des neurones ENTREES fonction du temps (Neurones de " + str(debut) + " a " + str(fin) + ")")
     for j in range(debut,fin):
         plt.plot(statemon.t/ms, statemon.v[j])
     plt.ylabel('voltage')
@@ -27,7 +27,7 @@ def plotVoltTemps(statemon, debut, fin):
     plt.show()
     
 def plotOutputNeurons(stateOutput, debut, fin):
-    title("Voltage final des neurones de SORTIE")
+    title("Difference de potentiel final des neurones de SORTIE")
     for j in range(debut,fin):
         plt.plot(stateOutput.t/ms, stateOutput.v[j])
     plt.ylabel('voltage')
@@ -50,11 +50,10 @@ def plotPopulationRate(popratemon):
     plt.show()
 
 def plotConnectivity(S):
-    title("Connectivite des couches de neurones et synapses")
     Ns = len(S.source)
     Nt = len(S.target)
     figure(figsize=(10,4))
-    subplot(121)
+    #subplot(111)
     plot(np.zeros(Ns), arange(Ns), 'ok', ms=10)
     plot(np.ones(Nt), arange(Nt), 'ok', ms=10)
     for i,j in zip(S.i, S.j):
@@ -63,11 +62,6 @@ def plotConnectivity(S):
     ylabel("Neuron index")
     xlim(-0.1, 1.1)
     ylim(-1, max(Ns, Nt))
-    subplot(122)   
-    plot(S.i, S.j, 'ok')
-    xlim(-1, Ns)
-    ylim(-1, Nt)
-    xlabel('Source neuron index')
-    ylabel('Target neuron index')
+    title("Connectivite des couches de neurones et synapses")
     plt.show()
 

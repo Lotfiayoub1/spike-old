@@ -71,8 +71,9 @@ frames_in = []
 
 # Callback triggered when there is a new message on the topic.
 def callbackReceiveMsgFromTopic(data):
-    #   rospy.loginfo("Le callback a recu: %s", data.data)
-    frames_in.append(float(data.data))
+    #rospy.loginfo("Le callback a recu: %s", data.data)
+    if float(data.data) != 0.0:
+        frames_in.append(float(data.data))
      
 def SNN():
 
@@ -95,20 +96,26 @@ def SNN():
     postsynaptic = "v_post += " + synapse_weight    # Synapse weight
     
     # Creation of the neurons and synapses structures
-    for i in range(INPUT_LAYER,OUTPUT_LAYER+1): 
-        if verbose: 
-            print "Assigning layer: " + str(i)
+    for layer in range(INPUT_LAYER,OUTPUT_LAYER+1): 
         # Neurons
-        if i == INPUT_LAYER:
+        if layer == INPUT_LAYER:
             neurons.append(NeuronGroup(input_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
-        if i == OUTPUT_LAYER: 
+            if verbose: 
+                print "Assigning INPUT layer: " + str(layer)
+        if layer == OUTPUT_LAYER: 
             neurons.append(NeuronGroup(output_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
-        if i < OUTPUT_LAYER and i > INPUT_LAYER:
+            if verbose: 
+                print "Assigning OUTPUT layer: " + str(layer)
+        if layer < OUTPUT_LAYER and layer > INPUT_LAYER:
             neurons.append(NeuronGroup(hidden_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
+            if verbose: 
+                print "Assigning HIDDEN layer: " + str(layer)
         # Synapses
-        if i > INPUT_LAYER:
-            synapses.append(Synapses(neurons[i-1], neurons[i], on_pre=postsynaptic))
-            synapses[i-1].connect()
+        if layer > INPUT_LAYER:
+            synapses.append(Synapses(neurons[layer-1], neurons[layer], on_pre=postsynaptic))           
+            synapses[layer-1].connect()
+            if verbose: 
+                print "Assigning SYNAPSES between layer: " + str(layer-1) + " and layer " + str(layer)
     
     # Creation of the monitors
     stateInput = StateMonitor(neurons[INPUT_LAYER], 'v', record=True)
@@ -143,17 +150,18 @@ def SNN():
         
         # When the callback function has received all the input neurons, assign those neurons to the input layer. 
         frames_assignation = frames_in
-        if len(frames_assignation) >= input_neurons:  
-            del frames_in[:]   
+        #print len(frames_assignation)
+        #print input_neurons
+        if len(frames_assignation) >= input_neurons:    
             if verbose:
                 rospy.loginfo("Assigning input neurons...")
             
-            for i in range(0,input_neurons-1): 
-                if i < len(frames_assignation):
-                    neurons[INPUT_LAYER].v[i] = frames_assignation[i] 
-                #if verbose:
-                #    rospy.loginfo("neuron : " + str(i) + " voltage: " + str(neurons[INPUT_LAYER].v[i]))  
-                
+            for i in range(0,input_neurons): 
+                neurons[INPUT_LAYER].v[i] = frames_assignation[i] 
+                if verbose:
+                    rospy.loginfo("neuron : " + str(i) + " voltage: " + str(neurons[INPUT_LAYER].v[i]))  
+
+            
             # Simulation execution
             if verbose:
                 rospy.loginfo("Simulation execution...")   
@@ -162,13 +170,9 @@ def SNN():
                 net.run(simulation_lenght, report='text', report_period=1*second)
             else:
                 net.run(simulation_lenght)
-        
+            del frames_in[:] 
             # If LEARNING mode, store the learned SNN in a file.  
             if mode == LEARNING:
-                if verbose:
-                    rospy.loginfo("Saving SNN after training...")  
-                net.store(learnedFile, pathSNN+learnedFile+".dat") 
-                net.restore(initFile, pathSNN+initFile+".dat")
                 # If it was the last train data, then exit. 
                 global nb_learn
                 nb_learn = nb_learn - 1
@@ -205,10 +209,18 @@ def SNN():
                 rospy.loginfo("Display graphics...")
             plotVoltTemps(stateInput, 0, input_neurons)
             plotSpikeTemps(spikeMonitor)
-            #plotConnectivity(ItoH1)
+            for k in range (0, len(synapses)):
+                plotConnectivity(synapses[k])
             #plotPopulationRate(popRateMonitor)
             plotOutputNeurons(stateOutput, 0, output_neurons)
             #profiling_summary(show=5)            
+
+    # If LEARNING mode, store the learned SNN in a file.  
+    if mode == LEARNING:
+        if verbose:
+            rospy.loginfo("Saving SNN after training...")  
+        net.store(learnedFile, pathSNN+learnedFile+".dat") 
+        net.restore(initFile, pathSNN+initFile+".dat")
 
 if verbose:
     rospy.loginfo("Subscribe to the callbacks (input neurons)...")

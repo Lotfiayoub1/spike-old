@@ -28,10 +28,10 @@ CHANNELS = 1
 # Frequence de 44100 ou 16000
 RATE = 16000
 # Nombre de frames lus par buffer (1024)
-CHUNK = 50   # 16
+CHUNK = 1000   # 50
 #RECORD_SECONDS = 3
 # Nombre de frames a lire (800)
-NOFFRAMES = 10000   
+NOFFRAMES = 5000   
 # Pour ne prendre qu'une partie des donnees.  Permet d'alleger les donnees.
 ECHANTILLON = 1   # On capture une valeur tous les x frames. (8)
  
@@ -39,7 +39,7 @@ rospy.init_node('node_saisie_son_ambiant', anonymous=True)
 rospy.loginfo("Behavior_saisie_son_ambiant")
 
 if mode == ROS or mode == ROSBAG:
-    topic_son_ambiant = rospy.Publisher('topic_in_SNN_SonGamma', String, queue_size=100)
+    topic_son_ambiant = rospy.Publisher('topic_in_SNN_Son528Hz', String, queue_size=100)
 
 frames = []
 
@@ -71,12 +71,18 @@ def cycleRecording():
             somme = somme + decoded[j]
         moyenne = somme / CHUNK
         #for j in range(0, len(decoded)):
-        #    print str(i) + " " + str(decoded[j])
+        #print str(moyenne)
         if mode == ROS or mode == ROSBAG:
-            tmp = float(moyenne) + float(2000) # float(32767.0)  
-            normalized = tmp / float(4000) # float(65535.0)
+            tmp = float(moyenne) # + float(100)  #float(32768.0)  
+            normalized = abs(tmp /  float (200))  #float(65535.0)
+            if normalized > 1.0:
+                normalized = 1.0
+            if normalized < 0.0:
+                normalized = 0.0
+            #normalized = normalized * 1.5
             #print str(i) + " decoded: " + str(float(moyenne)) + " normalized: " + str(float(normalized))
-            topic_son_ambiant.publish(str(float(normalized)))  
+            if normalized != 0.0:
+                topic_son_ambiant.publish(str(float(normalized)))  
             if verbose:    
                 printIntensite(normalized)
         if mode == ROSBAG or mode == TEST:            
@@ -95,8 +101,8 @@ def cycleRecording():
 def printIntensite(intensite):
     strToDisplay = ""
     while intensite > 0:
-        strToDisplay = strToDisplay + "#####"
-        intensite = intensite - 0.1   
+        strToDisplay = strToDisplay + "#"
+        intensite = intensite - 0.02   
     print strToDisplay
 
 
