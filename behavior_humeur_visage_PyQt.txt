@@ -1,0 +1,47 @@
+# use PyQt's QMovie() widget to play an animated gif
+# tested with PyQt4.4 and Python 2.5
+# also tetsed with PyQt4.5 and Python 3.0
+
+
+import sys
+from PyQt4.QtCore import *
+from PyQt4.QtGui import * 
+
+class AfficheVisage(QWidget):
+    def __init__(self, parent=None): 
+
+    QWidget.__init__(self, parent)
+    # setGeometry(x_pos, y_pos, width, height)
+    setGeometry(0, 0, 800, 480)
+    setWindowTitle("Spike")
+
+    # Creer label reflexion
+    refelexion = QLabel()
+    # expand and center the label
+    reflexion.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
+    relexion.setAlignment(Qt.AlignCenter) 
+
+    # Mettre le .gif animé sur le label reflexion
+    agif = QMovie("./visage/reflexion5.gif", QByteArray(), self)
+    agif.setCacheMode(QMovie.CacheAll)
+    agif.setSpeed(100)
+    relfexion.setMovie(agif)
+    agif.start() 
+
+
+    # Creer le label yeux et ajouter l'image
+    yeux = QLabel()
+    pixmap = QPixmap("./visage/yeux_verts.png")
+    yeux.setPixmap(pixmap)
+    yeux.show()
+
+    # Creation du layout de l'ecran et ajout des 2 parties. 
+    main_layout = QVBoxLayout()
+    main_layout.addWidget(reflexion)
+    main_layout.addWidget(yeux)
+    setLayout(main_layout)
+
+app = QApplication(sys.argv)
+player = AfficheVisage()
+player.show()
+sys.exit(app.exec_()) 
