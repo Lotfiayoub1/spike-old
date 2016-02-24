@@ -1,46 +1,45 @@
 TODO: 
 
-SR - À faire d'ici au retour de la semaine de relâche. 
-
+SR - Ã€ faire d'ici au retour de la semaine de relÃ¢che. 
 
 COURS PROJET------------
 ------PHYSIQUE----------
-- A. Confirmer stock (24 février)
-- A. Commander stock.
+
 - A. Mesures et coupe
 - A. Assemblage
 - A. Mises au point 
+- A. Brancher
 
 
 -----LOGICIEL-----------
 
-			
 - A. Behavior_son				SR
 - A. Behavior_chatbot_AIML			SR
 - A. Commandes vocales				SR
 - A. Voix.					SR
 - A. Behavior_expressions_faciales		SR
 - A. Messages entre noeuds			SR
-- A. Behavior_avance
-- A. Behavior_tourne
-- A  Behavior_detecte_environnement
 - A. Behavior_deplacement
-- A. Programmer ACT-R				
-- CHALET: Étudier ACT-R - Python		SR
-- CHALET: Débugguer AIML français. 		SR
-
-- X Lire documentation AIML
-- X Installer Ubuntu LTS Trusty
-- X Installer LXDE GUI
-- X Installer ROS Turtle Jade	
-- X Recompiler Catkin			
-
+- A. Attention
+- CHALET: DÃ©bugguer AIML franÃ§ais. 		SR
 
 ------DOCUMENTATION------
 - UPDATES CONSTANTS: Guide de l'usager (Installation, configuration...)
 - CHALET: Guide Ubuntu Trusty Tahr		SR
 
+------TERMINÃ‰-------------
+- X Lire documentation AIML
+- X Installer Ubuntu LTS Trusty
+- X Installer LXDE GUI
+- X Installer ROS Turtle Jade	
+- X Recompiler Catkin			
+- X Confirmer stock 
+- X Commander stock.
 - X Guide AIML
+
+
+
+
 
 
 
@@ -50,22 +49,22 @@ COURS PROJET------------
 
 Robot assistant prof.
 	- Peut assister le prof en classe.
-	- Peut le remplacer à l'occasion (pour refaire le même cours aux étudiants
-		qui n'étaient pas là, qui veulent resuivre). 
+	- Peut le remplacer Ã  l'occasion (pour refaire le mÃªme cours aux Ã©tudiants
+		qui n'Ã©taient pas lÃ , qui veulent resuivre). 
 
 
-	- JSD: Faire un plan de ce que ça pourrait ressembler...
+	- JSD: Faire un plan de ce que Ã§a pourrait ressembler...
 		- Zone de copier-coller web pour analyse du:
-			- code, texte, problème math...
+			- code, texte, problÃ¨me math...
 		- Liste d'intervention en classe.
 		- Stockage de consignes.
-		- Connaissances propres au travail à faire.
+		- Connaissances propres au travail Ã  faire.
 		- Zone de retroaction web.
-		- Capacité de donner une théorie, synchro avec Power-Point/vidéo.
-		- Capacité de répéter au besoin. 
+		- CapacitÃ© de donner une thÃ©orie, synchro avec Power-Point/vidÃ©o.
+		- CapacitÃ© de rÃ©pÃ©ter au besoin. 
 
-	- Web (étudiants):
-		- Indique leur niveau de compréhension
+	- Web (Ã©tudiants):
+		- Indique leur niveau de comprÃ©hension
 		- Manifestent une question.
 		- 
 
