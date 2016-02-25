@@ -1,10 +1,11 @@
 TODO: 
 
-SR - À faire d'ici au retour de la semaine de relâche. 
-
 COURS PROJET------------
 ------PHYSIQUE----------
 
+- Démonter UdeS
+- Nettoyer UdeS
+- A. Commander pièces manquantes
 - A. Mesures et coupe
 - A. Assemblage
 - A. Mises au point 
@@ -13,19 +14,19 @@ COURS PROJET------------
 
 -----LOGICIEL-----------
 
-- A. Behavior_son				SR
-- A. Behavior_chatbot_AIML			SR
-- A. Commandes vocales				SR
-- A. Voix.					SR
-- A. Behavior_expressions_faciales		SR
-- A. Messages entre noeuds			SR
+- Behavior_son		 		        
+- Behavior_chatbot_AIML			        
+- Commandes vocales				
+- Voix.					        
+- A. Behavior_expressions_faciales		
+- A. Messages entre noeuds			
 - A. Behavior_deplacement
 - A. Attention
-- CHALET: Débugguer AIML français. 		SR
+- CHALET: Débugguer AIML français. 		
 
 ------DOCUMENTATION------
 - UPDATES CONSTANTS: Guide de l'usager (Installation, configuration...)
-- CHALET: Guide Ubuntu Trusty Tahr		SR
+- CHALET: Guide Ubuntu Trusty Tahr		
 
 ------TERMINÉ-------------
 - X Lire documentation AIML
