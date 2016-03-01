@@ -1,28 +1,25 @@
-TODO: 
+TODO: JSD
 
 COURS PROJET------------
 ------PHYSIQUE----------
 
-- Démonter UdeS
-- Nettoyer UdeS
 - A. Commander pièces manquantes
 - A. Mesures et coupe
 - A. Assemblage
-- A. Mises au point 
 - A. Brancher
-
+- A. Finition
 
 -----LOGICIEL-----------
 
-- Faire un mirroir
-- Behavior_son		 		        
+- Behavior_son	
+- Voix.	 		        
 - Behavior_chatbot_AIML			        
-- Commandes vocales				
-- Voix.					        
+- Commandes vocales									        
 - A. Behavior_expressions_faciales		
 - A. Messages entre noeuds			
 - A. Behavior_deplacement
 - A. Attention
+- A. Faire un mirroir (apt-get install apt-mirror)
 - CHALET: Débugguer AIML français. 		
 
 ------DOCUMENTATION------
@@ -38,6 +35,10 @@ COURS PROJET------------
 - X Confirmer stock 
 - X Commander stock.
 - X Guide AIML
+- X Démonter UdeS
+- X Connexion Internet maison
+- X Nettoyer UdeS
+- X Refaire plan
 
 
 

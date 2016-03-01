@@ -3,11 +3,21 @@ import roslib
 import rospy, os, sys
 import time
 import aiml
-from espeak import espeak
-import festival
+from sound_play.msg import SoundRequest
+from sound_play.libsoundplay import SoundClient
 
 rospy.init_node('node_aiml', anonymous=True)
 rospy.loginfo("node_play_aiml")
+
+rospy.loginfo("Init son")
+soundhandle = SoundClient()
+rospy.sleep(1)
+soundhandle.stopAll()
+
+rospy.loginfo("Dire hello world")
+soundhandle.say('Hello world!')
+rospy.sleep(3)
+
 
 # L'objet Kernel est l'interface public pour l'interpreteur AIML. 
 #k = aiml.Kernel()
@@ -16,16 +26,13 @@ rospy.loginfo("node_play_aiml")
 # startup.xml charge tous les fichiers de contenu .aiml
 
 # Version anglaise
-#k.learn("/home/pi/catkin_ws/src/spike/src/aiml/en/startup.xml")
+#k.learn("/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/startup.xml")
 
 # Version francaise
-#k.learn("/home/pi/catkin_ws/src/spike/src/aiml/fr/startup.xml")
+#k.learn("/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/startup.xml")
 
 
 #k.respond("load aiml b")
-
-#espeak.synth("Hello world!")
-festival.say("Hello World")
 
 #while True: print k.respond(raw_input("> "))
 
