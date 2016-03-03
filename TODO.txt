@@ -10,17 +10,17 @@ COURS PROJET------------
 - A. Finition
 
 -----LOGICIEL-----------
-
-- Behavior_son	
-- Voix.	 		        
-- Behavior_chatbot_AIML			        
-- Commandes vocales									        
+	
+- Voix.	 		        		        
+- Commandes vocales	
+- Debugguer AIML
+- Convertir AIML en 2.0 et faire un autre fichier .aiml (Cegep) (+saveBrain et loadBrain)								        
 - A. Behavior_expressions_faciales		
 - A. Messages entre noeuds			
 - A. Behavior_deplacement
 - A. Attention
 - A. Faire un mirroir (apt-get install apt-mirror)
-- CHALET: Débugguer AIML français. 		
+
 
 ------DOCUMENTATION------
 - UPDATES CONSTANTS: Guide de l'usager (Installation, configuration...)
@@ -39,7 +39,9 @@ COURS PROJET------------
 - X Connexion Internet maison
 - X Nettoyer UdeS
 - X Refaire plan
-
+- x Behavior_chatbot_AIML	
+- X Débugguer AIML français. 
+- X Behavior_son		
 
 
 

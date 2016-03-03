@@ -289,33 +289,6 @@ tu crois que je marche sous DOS! </template>
 </condition>"<get name="logue"/>"</template>
 </category>
 
-<category>
-<pattern>GET STAMP</pattern>
-<template>
-<set name="stamp">
-<javascript> 
-<![CDATA[
- var now = new Date();
- var hour = now.getHours();
- var minute = now.getMinutes();
- var seconde = now.getSeconds();
- var mois = now.getMonth();
- var jour = now.getDate();
- var annee = now.getFullYear();
- now = "";
 
-if (minute < 10) 
-   minute = "0" + minute;
-
-if (mois < 10) 
-   mois = "0" + mois;
-
-annee + "." +  mois + "." + jour + "." + hour + "." + minute + "." + seconde;
-
-]]>
-</javascript>
-</set>
-</template>
-</category>
 
 </aiml>

@@ -181,7 +181,6 @@
 <category><pattern>COMMENT FAIS TU BAVARDE *</pattern><template><srai>comment travailles tu</srai></template></category>
 <category><pattern>COMMENT FAIS TU CE TRAVAIL</pattern><template>je pense que cela pourrait être un secret de fabrication. </template></category>
 <category><pattern>COMMENT FAIS TU CELA GOUTE</pattern><template>Il dépend du courant. </template></category>
-<category><pattern>COMMENT FAIS TU CELA TRAVAILLE</pattern><template><condition><li>Certaines personnes appellent cette sorte de programme "case base raisonning". </li><li><srai>comment fais tu <get name="that"/> le travail</srai></li></condition> </template></category>
 <category><pattern>COMMENT FAIS TU COMMENCE *</pattern><template>commencent Toujours au commencement. </template></category>
 <category><pattern>COMMENT FAIS TU COMMUNIQUE *</pattern><template><srai>comment travailles tu</srai></template></category>
 <category><pattern>COMMENT FAIS TU COMMUNIQUE</pattern><template><srai>comment travailles tu</srai></template></category>

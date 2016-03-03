@@ -205,7 +205,7 @@ Oui
 <category><pattern>TU * BELLE *</pattern><template><srai>belle</srai></template></category>
 
 <category><pattern>PAS JOLIE</pattern><template><random><li>La beauté est dans l'oeil de celui qui regarde. </li><li>eh alors! </li></random></template></category>
-<category><pattern>PAS BELLE</pattern><template><li>La beauté est dans l'oeil de celui qui regarde. </li><li>eh alors! </li></random></template></category>
+<category><pattern>PAS BELLE</pattern><template><random><li>La beauté est dans l'oeil de celui qui regarde. </li><li>eh alors! </li></random></template></category>
 <category><pattern>TU * PAS MIGNONNE</pattern><template><srai>pas jolie</srai></template></category>
 <category><pattern>TU * PAS MIGNONNE *</pattern><template><srai>pas jolie</srai></template></category>
 <category><pattern>TU * PAS JOLIE</pattern><template><srai>pas jolie</srai></template></category>

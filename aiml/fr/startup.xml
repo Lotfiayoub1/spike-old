@@ -2,90 +2,97 @@
 
 <!-- This category works with the Standard AIML Set -->
 <category>
-<pattern>LOAD AIML B</pattern>
+<pattern>LOAD AIML FRENCH</pattern>
 <template>
 
 <!-- Load standard AIML set -->
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/A.aiml</learn> -->
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/apparence.aiml</learn>  -->
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/atomique.aiml</learn> -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/B.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/botmaster.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/C.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/calendrier.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/cest.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/chngmode.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/chngvoie.aiml</learn>
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/combien.aiml</learn> -->
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/comment.aiml</learn> -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/connaissance.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/connexion.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/D.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/deduction.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/E.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/estceque.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/estu.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/etranger.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/exclamation.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/F.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/feminin.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/G.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/genre.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/H.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/humour.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/I.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/insulte.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/interjection.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/interrogation.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/J.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/K.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/L.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/M.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/masculin.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/merci.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/N.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/negation.aiml</learn>
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/nom.aiml</learn> -->
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/nombres.aiml</learn> -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/O.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/ou.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/ouinon.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/P.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/peuxtu.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/pourquoi.aiml</learn>
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/prefixes.aiml</learn> -->
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/profile.aiml</learn> -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/Q.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/quand.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/que.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/quel.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/questceque.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/questions.aiml</learn>
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/qui.aiml</learn> -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/quoi.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/R.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/reponses.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/rumeur.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/S.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/saluation.aiml</learn>
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/sexe.aiml</learn> -->
-<!--<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/singulier.aiml</learn> -->
-<!--<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/srai.aiml</learn> -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/srai-deduction.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/srai-insulte.aiml</learn>
-<!-- <learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/srai-sexe.aiml</learn> -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/substituteur.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/suffixes.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/synonymes.aiml</learn>
-<!--<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/system.aiml</learn>  -->
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/T.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/that.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/that-questions.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/U.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/V.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/W.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/X.aiml</learn>
-<learn>/home/pi/catkin_ws/src/spike/src/aiml/fr/Z.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/A.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/apparence.aiml</learn> 
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/atomique.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/B.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/botmaster.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/C.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/calendrier.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/cest.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/chngmode.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/chngvoie.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/combien.aiml</learn> 
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/comment.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/connaissance.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/connexion.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/D.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/deduction.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/E.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/estceque.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/estu.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/etranger.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/exclamation.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/F.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/feminin.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/G.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/genre.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/H.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/humour.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/I.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/insulte.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/interjection.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/interrogation.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/J.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/K.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/L.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/M.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/masculin.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/merci.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/N.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/negation.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/nom.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/nombres.aiml</learn> 
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/O.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/ou.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/ouinon.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/P.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/peuxtu.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/pourquoi.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/prefixes.aiml</learn> 
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/profile.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/Q.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/quand.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/que.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/quel.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/questceque.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/questions.aiml</learn>
+<!--  <learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/qui.aiml</learn>   -->
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/quoi.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/R.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/reponses.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/rumeur.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/S.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/saluation.aiml</learn>
+<!--  <learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/sexe.aiml</learn> -->
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/singulier.aiml</learn> 
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/srai.aiml</learn> 
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/srai-deduction.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/srai-insulte.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/srai-sexe.aiml</learn> 
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/substituteur.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/suffixes.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/synonymes.aiml</learn>
+<!--  <learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/system.aiml</learn>  -->
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/T.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/that.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/that-questions.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/U.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/V.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/W.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/X.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/Z.aiml</learn>
+</template>
+</category>
+
+<category>
+<pattern>TEST</pattern>
+<template>
+OK JSD.
 </template>
 </category>
 

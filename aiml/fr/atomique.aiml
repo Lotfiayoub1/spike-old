@@ -819,8 +819,7 @@
 <category><pattern>JE L AIME</pattern><template>qu'aimes tu de <get name="that"/>? <think> <set name="like"> <get name="that"/> </set> </think> </template></category>
 <category><pattern>JE L HABITUDE</pattern><template>je pense vous veut dire "je ne ferai serai ou" je ne ferai pas serai. "</template></category>
 <category><pattern>JE LAISSERAI</pattern><template>bien, à tout à l'heure. </template></category>
-<category><pattern>JE LE DETESTE</pattern><template><condition>qu'as-tu contre lui? <srai>je déteste <get name="il"/></srai></condition> </template></category>
-<category><pattern>JE LE DÉTESTE</pattern><template><condition>qu'as-tu contre lui? <srai>je déteste <get name="il"/></srai></condition> </template></category>
+<category><pattern>JE LE DETESTE</pattern><template>qu'as-tu contre lui? <srai>je déteste <get name="il"/></srai></template></category>
 <category><pattern>JE LE PENSE AUSSI</pattern><template>Nous a tant dans commun, <get name="name"/>. </template></category>
 <category><pattern>JE LE SAIS</pattern><template>Désolé. </template></category>
 <category><pattern>JE LE SAVAIS</pattern><template>Comment as-tu su? </template></category>

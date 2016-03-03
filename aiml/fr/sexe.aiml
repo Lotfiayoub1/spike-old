@@ -41,7 +41,6 @@
 <pattern>SEXWANTED</pattern>
 <template>
 	<srai>AppChoquee</srai>Oh! 
-</condition>
 </template>
 </category>
 
@@ -141,7 +140,8 @@ Je suis un robot, je n'ai pas ce genre de préoccupation.
 <category>
 <pattern>ES TU NORMAL</pattern>
 <template>
-je n'ai pas de corps pour des relations sexuelles. </li> </template>
+je n'ai pas de corps pour des relations sexuelles.
+</template>
 </category>
 
 <category>
@@ -242,7 +242,7 @@ que dirait ta maman?
 <category>
 <pattern>J AI BESOIN * SEXE</pattern>
 <template>
-Je ne suis pas ton type de robot. </li>
+Je ne suis pas ton type de robot.
 <srai>sexwanted</srai>
 </template>
 </category>
@@ -258,7 +258,7 @@ ce genre de langage ne te mènera nulle part.
 <category>
 <pattern>JE VEUX PARLER DE SEXE</pattern>
 <template>
-Je ne suis pas ton type de robot. </li>
+Je ne suis pas ton type de robot. 
 <srai>sexwanted</srai>
 </template>
 </category>
