@@ -21,6 +21,7 @@ nomWav = 'robot.wav'
 attente = 5 # seconds
 while (True):
 		#os.system("mplayer " + soundAssets + nomWav)
+		soundhandle.stopAll()
 		soundhandle.playWave(soundAssets + nomWav)
 		time.sleep(attente)
 

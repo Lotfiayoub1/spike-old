@@ -6,6 +6,7 @@
 <template>
 
 <!-- Load standard AIML set -->
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/jsd-cegep.aiml</learn>
 <learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/A.aiml</learn>
 <learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/apparence.aiml</learn> 
 <learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/atomique.aiml</learn>

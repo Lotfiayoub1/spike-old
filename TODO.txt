@@ -1,8 +1,8 @@
 TODO: JSD
-
 COURS PROJET------------
 ------PHYSIQUE----------
 
+- A. Protoype tete
 - A. Commander pièces manquantes
 - A. Mesures et coupe
 - A. Assemblage
@@ -10,21 +10,23 @@ COURS PROJET------------
 - A. Finition
 
 -----LOGICIEL-----------
-	
-- Voix.	 		        		        
-- Commandes vocales	
-- Debugguer AIML
-- Convertir AIML en 2.0 et faire un autre fichier .aiml (Cegep) (+saveBrain et loadBrain)								        
-- A. Behavior_expressions_faciales		
-- A. Messages entre noeuds			
+
+- Installer reconnaissance vocale francais (pocketSphinx)
+- Perfectionner fichier jsd_cegep.aiml et renomer spike-base.aiml
+- Creer le graphe d'architecture
+- Coder la base de l'architecture
+- Faire un mirroir (apt-get install apt-mirror)
+- Attention
+- Messages entre noeuds
+- A. Behavior_expressions_faciales					
 - A. Behavior_deplacement
-- A. Attention
-- A. Faire un mirroir (apt-get install apt-mirror)
+- A. Commandes vocales	
+- A. A la fin  (+saveBrain et loadBrain)								        
 
 
 ------DOCUMENTATION------
 - UPDATES CONSTANTS: Guide de l'usager (Installation, configuration...)
-- CHALET: Guide Ubuntu Trusty Tahr		
+		
 
 ------TERMINÉ-------------
 - X Lire documentation AIML
@@ -42,8 +44,10 @@ COURS PROJET------------
 - x Behavior_chatbot_AIML	
 - X Débugguer AIML français. 
 - X Behavior_son		
-
-
+- X Voix.	 		        		        
+- X Faire un fichier .sh qui lance la procedure de demarrage.
+- X Installer voix francais (eSpeak) 
+- X Guide Ubuntu Trusty Tahr
 
 
 
