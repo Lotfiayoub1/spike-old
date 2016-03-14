@@ -7,7 +7,7 @@ pygtk.require('2.0')
 import gtk
 
 rospy.init_node('node_humeur', anonymous=True)
-rospy.loginfo("node_humeur")
+rospy.loginfo("behavior_humeur")
 
 # Code vient d'ici:  http://www.pygtk.org/pygtk2tutorial/sec-Images.html#idp5575312 
 

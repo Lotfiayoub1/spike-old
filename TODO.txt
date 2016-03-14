@@ -1,7 +1,8 @@
-TODO: JSD
+﻿TODO: JSD
 COURS PROJET------------
 ------PHYSIQUE----------
 
+- Faire fonctionner écran.
 - A. Protoype tete
 - A. Commander pièces manquantes
 - A. Mesures et coupe
@@ -10,22 +11,19 @@ COURS PROJET------------
 - A. Finition
 
 -----LOGICIEL-----------
-
-- Installer reconnaissance vocale francais (pocketSphinx)
-- Perfectionner fichier jsd_cegep.aiml et renomer spike-base.aiml
-- Creer le graphe d'architecture
-- Coder la base de l'architecture
-- Faire un mirroir (apt-get install apt-mirror)
-- Attention
+				
+- Finaliser de coder Attention
+- Finaliser Behavior_expressions_faciales	
 - Messages entre noeuds
-- A. Behavior_expressions_faciales					
+- TEMPS PERDU: Perfectionner fichiers .aiml 
+- A. Faire un mirroir (apt-get install apt-mirror)
+- A. Installer reconnaissance vocale francais (pocketSphinx)
 - A. Behavior_deplacement
-- A. Commandes vocales	
-- A. A la fin  (+saveBrain et loadBrain)								        
 
 
 ------DOCUMENTATION------
 - UPDATES CONSTANTS: Guide de l'usager (Installation, configuration...)
+- Creer le graphe d'architecture
 		
 
 ------TERMINÉ-------------
