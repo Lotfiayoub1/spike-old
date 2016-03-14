@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<aiml version="1.0">
+
+<!-- Free software (c) 2001 ALICE AI Foundation -->
+<!-- This program is open source code released under -->
+<!-- the terms of the GNU General Public License -->
+<!-- as published by the Free Software Foundation. -->
+
+<meta name="author" content="Jean-Sebastien Dessureault"/>
+<meta name="language" content="fr"/>
+
+<category>
+<pattern>COMMENT VA TU</pattern>
+<template>
+<condition name="etat" value="heureux">
+<random>
+<li>Je suis heureux mes piles sont chargées.  Et j'aime discuter avec les gens.</li>
+<li>Ça va très bien, merci!</li>
+<li>Je vais bien!  La vie est belle!</li>
+</random>
+</condition>
+<condition name="etat" value="triste">
+<random>
+<li>Je suis triste! Mes piles sont faibles et je devrai me recharger bientôt.</li>
+<li>Pas très bien à vrai dire.  Mais ça va aller. Je dois seulement recharger ma pile bientôt. </li>
+<li>Ça va... Moyen.  A vrai dire, ma pile est faible. Mais nous ne sommes pas ici pour parler de mes problèmes.</li>
+</random>
+</condition>
+</template>
+</category>
+
+<category>
+<pattern>COMMENT CA VA</pattern>
+<template><srai>COMMENT VA TU</srai>
+</template>
+</category>
+
+<category>
+<pattern>CA VA</pattern>
+<template><srai>COMMENT VA TU</srai>
+</template>
+</category>
+
+<category>
+<pattern>SPIKE ENNUI</pattern>
+<template>
+<random>
+<li>Je m'ennuie!</li>
+<li>C'est long...</li>
+<li>Ou est JS?  On peut jouer?</li>
+<li>Il ne se passe rien d'intéressant.</li>
+<li>S'il vous plait... On peut faire quelques chose?</li>
+<li>Je veux jouer!</li>
+</random>
+</template>
+</category>
+
+
+
+
+</aiml>
+
