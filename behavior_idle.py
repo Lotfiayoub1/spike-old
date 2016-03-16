@@ -8,7 +8,7 @@ rospy.loginfo("Behavior_idle")
 
 while True:
 	# Quand il ne se passe rien:
-	# Il appelle le chat bot "SPIKE ENNUI" (après 10 minute 	# d'inactivité	
-	# Il joue un son, à une certaine fréquence. 
+	# Il peut appler chat bot "SPIKE ENNUI" 	
+	# Ou il joue un son.
 	
 

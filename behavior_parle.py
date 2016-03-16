@@ -23,7 +23,7 @@ langue = francais
 while True:
 	if mode == modeChatBot:
 		# modeChatBot
-		# Bloque sur l'attente de la réponse 
+		# Bloque sur l'attente de la reponse 
 	else:
 		# modeTest
 		entree = raw_input("Test a prononcer> ")

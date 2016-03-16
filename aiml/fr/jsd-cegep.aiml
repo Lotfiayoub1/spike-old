@@ -38,23 +38,12 @@
 
 
 <category>
-<pattern>PRESENTATION</pattern>
-<template>
-<random>
-<li>Je m appelle Spike. Quel est ton nom?</li>
-<li>Mon nom est Spike.  Quel est le tiens?</li>
-<li>Je me nomme Spike. Et toi?</li>
-</random>
-</template>
-</category>
-
-<category>
 <pattern>MON NOM EST *</pattern>
 <template>
 <random>
-<li>Bonjour <set name="interlocuteur"> <star/>!</li>
-<li>Enchante <set name="interlocuteur"> <star/>!</li>
-<li>Salut <set name="interlocuteur"> <star/>!</li>
+<li>Bonjour <set name="interlocuteur"><star/></set>!</li>
+<li>Enchante <set name="interlocuteur"><star/></set>!</li>
+<li>Salut <set name="interlocuteur"><star/></set>!</li>
 </random>
 </template>
 </category>

@@ -2,22 +2,20 @@
 COURS PROJET------------
 ------PHYSIQUE----------
 
-- Faire fonctionner écran.
-- A. Protoype tete
-- A. Commander pièces manquantes
+- A. Fabriquer la tete
 - A. Mesures et coupe
 - A. Assemblage
 - A. Brancher
 - A. Finition
 
 -----LOGICIEL-----------
-				
-- Finaliser de coder Attention
-- Finaliser Behavior_expressions_faciales	
-- Messages entre noeuds
+
+- Faire quelques expressions faciales et pensee en GIMP et ajuster script		
+- Finir behavior_parle		
+- Behavior idle
+- Behavior_ecoute
 - TEMPS PERDU: Perfectionner fichiers .aiml 
 - A. Faire un mirroir (apt-get install apt-mirror)
-- A. Installer reconnaissance vocale francais (pocketSphinx)
 - A. Behavior_deplacement
 
 
@@ -46,33 +44,10 @@ COURS PROJET------------
 - X Faire un fichier .sh qui lance la procedure de demarrage.
 - X Installer voix francais (eSpeak) 
 - X Guide Ubuntu Trusty Tahr
-
-
-
-
-
-
-
-
-Robot assistant prof.
-	- Peut assister le prof en classe.
-	- Peut le remplacer à l'occasion (pour refaire le même cours aux étudiants
-		qui n'étaient pas là, qui veulent resuivre). 
-
-
-	- JSD: Faire un plan de ce que ça pourrait ressembler...
-		- Zone de copier-coller web pour analyse du:
-			- code, texte, problème math...
-		- Liste d'intervention en classe.
-		- Stockage de consignes.
-		- Connaissances propres au travail à faire.
-		- Zone de retroaction web.
-		- Capacité de donner une théorie, synchro avec Power-Point/vidéo.
-		- Capacité de répéter au besoin. 
-
-	- Web (étudiants):
-		- Indique leur niveau de compréhension
-		- Manifestent une question.
-		- 
+- X Finaliser de coder Attention
+- X Faire fonctionner écran.
+- X Commander pièces manquantes
+- X Finaliser Behavior_expressions_faciales
+- X Messages entre noeuds	
 
 

@@ -17,8 +17,7 @@
 <li>J'aime aussi <star/></li>
 <li><star/>? J'aime aussi!</li>
 <li><star/>? Ça me laisse indifférent.</li>
-<li><star/><li>Je n'apprécie pas tellement <star/></li>
-</li>
+<li><star/>Je n'apprécie pas tellement <star/></li>
 </random>
 </template>
 </category>
@@ -30,8 +29,7 @@
 <li>Je n'aime pas non plus <star/></li>
 <li><star/>? J'aime pas!</li>
 <li><star/>? Ça me laisse indifférent.</li>
-<li><star/><li>J'apprécie <star/></li>
-</li>
+<li><star/>J'apprécie <star/></li>
 </random>
 </template>
 </category>

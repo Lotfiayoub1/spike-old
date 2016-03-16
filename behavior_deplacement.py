@@ -13,7 +13,7 @@ mode = modeTest
 while True:
 	if mode == modeRobot:
 		# modeRobot
-		# Bloque sur l'attente de la réponse 
+		# Bloque sur l'attente de la reponse 
 	else:
 		# modeTest
 		# je ne sais pas encore ce qu'il y aura ici		

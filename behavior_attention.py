@@ -2,39 +2,61 @@
 import roslib
 import rospy, os, sys
 import time
+import subprocess
+from std_msgs.msg import String
 
 rospy.init_node('node_attention', anonymous=True)
 rospy.loginfo("Behavior_attention")
 
-modeVerbose = 1
-modeSilencieux = 2
-mode = modeVerbose
+verbose = True
 
-# TODO: Faire un tableau de behaviors
-# Est-ce la bonne façon de démarrer un noeud? 
-# Il faut un handle dessus. 
-# Faire un tableau de structure
-# Struct Behaviors
-#	Nom du behavior
-#	Nom du fichier
-# 	Handle
-#	Priorité
-# Avec un Dict, possiblement. 
+if verbose:
+	rospy.loginfo("Initialisation des topics")
 
-# Démarrer les noeuds dans une boucle. 
-os.system("rosrun spike behavior_chatbot_aiml.py")
-os.system("rosrun spike behavior_deplacement.py")
-os.system("rosrun spike behavior_ecoute.py")
-os.system("rosrun spike behavior_humeur.py")
-os.system("rosrun spike behavior_joue_son.py")
-os.system("rosrun spike behavior_parle.py")
-os.system("rosrun spike behavior_idle.py")
+# Communication avec Behavior_joue_son
+topic_joue_son = rospy.Publisher('topic_joue_son', String, queue_size=10)
+# Communication avec Behavior_humeur (visage)
+topic_humeur = rospy.Publisher('topic_humeur', String, queue_size=10)
+topic_pensee = rospy.Publisher('topic_pensee', String, queue_size=10)
+
+
+# Demarrer les noeuds dans une boucle. 
+if verbose:
+	rospy.loginfo("Demarrage des noeuds")
+
+#os.spawnl(os.P_NOWAIT, 'rosrun spike behavior_joue_son.py')
+#os.spawnl(os.P_NOWAIT, 'rosrun spike behavior_chatbot_aiml.py')
+#os.spawnl(os.P_NOWAIT, 'rosrun spike behavior_parle.py')
+#os.spawnl(os.P_NOWAIT, 'rosrun spike behavior_idle.py')
+#os.spawnl(os.P_NOWAIT, 'rosrun spike behavior_deplacement.py')
+#os.spawnl(os.P_NOWAIT, 'rosrun spike behavior_ecoute.py')
+#os.spawnl(os.P_NOWAIT, 'rosrun spike behavior_humeur.py')
+
+etatHumeur = "Neutre"
+etatPensee = "Neutre"
+
 
 while True:
-	if mode == modeVerbose:
-		print "Attention" 
-	# Boucle sur tous les behaviors et retourne le prioritaire.
-	# Execute le prioritaire. 
+	if verbose:
+		rospy.loginfo("Boucle attention")
 
-	if mode == modeVerbose:
-		print "Execution du behavior... Priorité X."
+	time.sleep(10)
+	# Ecoute les messages des nodes
+	
+	# Traitement temporaire pour tester humeur
+	if etatPensee == "Neutre":
+		etatPensee = "Reflexion"
+	else:
+		etatPensee = "Neutre"
+	if etatHumeur == "Neutre":
+		etatHumeur = "Joyeux"
+	else:
+		etatHumeur = "Neutre"
+	
+	# Execute le node prioritaire
+	topic_joue_son.publish("EtatEveil")
+	topic_humeur.publish(etatHumeur)
+	topic_pensee.publish(etatPensee)
+
+	if verbose:
+		print "Node Attention: Execution behavior X"
