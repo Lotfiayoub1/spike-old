@@ -13,7 +13,7 @@ rospy.loginfo("behavior_humeur")
 modeTest = 1
 modeRecoitSignal = 2
 
-mode = modeRecoitSignal
+mode = modeTest
 verbose = True
 
 
@@ -33,11 +33,10 @@ class ExpressionFaciale:
 	imageHumeur = gtk.Image()
 	canevas = gtk.Fixed()
 
-	pix_pensee_reflexion = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/reflexion/reflexion1.gif")
-	pix_pensee_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/reflexion/reflexion2.gif")
-	pix_humeur_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/reflexion/reflexion3.gif")
-	pix_humeur_joyeux = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/reflexion/reflexion4.gif")
-
+	pix_pensee_reflexion = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion.gif")
+	pix_pensee_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeNeutre.gif")
+	pix_humeur_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurNeutre.gif")
+	pix_humeur_joyeux = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurJoyeux.png")
 
 	def expression(self, widget, data=None):
 		print "Expression faciale"
@@ -115,7 +114,7 @@ class ExpressionFaciale:
 		self.imageHumeur.set_from_animation(self.pix_humeur_neutre)
 		self.imageReflexion.set_from_animation(self.pix_pensee_neutre)
 		self.canevas.put(self.imageReflexion, 0, 0)
-		self.canevas.put(self.imageHumeur, 0, 512)
+		self.canevas.put(self.imageHumeur, 0, 256)
 		self.window.add(self.canevas)
 		self.canevas.show()
 		self.rafraichir()

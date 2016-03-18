@@ -2,13 +2,13 @@
 COURS PROJET------------
 ------PHYSIQUE----------
 
-- A. Fabriquer la tete
 - A. Mesures et coupe
 - A. Assemblage
 - A. Brancher
 - A. Finition
 
 -----LOGICIEL-----------
+
 
 - Faire quelques expressions faciales et pensee en GIMP et ajuster script		
 - Finir behavior_parle		
@@ -49,5 +49,5 @@ COURS PROJET------------
 - X Commander pièces manquantes
 - X Finaliser Behavior_expressions_faciales
 - X Messages entre noeuds	
-
-
+- X Installer et reparer hauts-parleurs
+- X Fabriquer la tete
