@@ -8,14 +8,11 @@ COURS PROJET------------
 - A. Finition
 
 -----LOGICIEL-----------
-
-
-- Faire quelques expressions faciales et pensee en GIMP et ajuster script		
-- Finir behavior_parle		
-- Behavior idle
+				
+- Faire un mirroir (apt-get install apt-mirror)
+- Tout repasser IA et faire fonctionner ensemble
 - Behavior_ecoute
 - TEMPS PERDU: Perfectionner fichiers .aiml 
-- A. Faire un mirroir (apt-get install apt-mirror)
 - A. Behavior_deplacement
 
 
@@ -51,3 +48,7 @@ COURS PROJET------------
 - X Messages entre noeuds	
 - X Installer et reparer hauts-parleurs
 - X Fabriquer la tete
+- X Faire quelques expressions faciales et pensee en GIMP et ajuster script
+- X Finir behavior_parle
+- X Behavior idle
+- X Script pour tout demarrer dans des fenetes separees.

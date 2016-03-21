@@ -33,10 +33,19 @@ class ExpressionFaciale:
 	imageHumeur = gtk.Image()
 	canevas = gtk.Fixed()
 
-	pix_pensee_reflexion = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion.gif")
 	pix_pensee_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeNeutre.gif")
+	pix_pensee_reflexion1 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion1.gif")
+	pix_pensee_reflexion2 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion2.gif")
+	pix_pensee_reflexion3 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion3.gif")
+	pix_pensee_reflexion4 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion4.gif")
+
 	pix_humeur_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurNeutre.gif")
 	pix_humeur_joyeux = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurJoyeux.png")
+	pix_humeur_fatigue = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurFatigue.gif")
+	pix_humeur_triste = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurTriste.gif")
+	pix_humeur_troll = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurTroll.png")
+	pix_humeur_terminator = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurTerminator.png")
+
 
 	def expression(self, widget, data=None):
 		print "Expression faciale"
@@ -78,7 +87,7 @@ class ExpressionFaciale:
 		if self.etatPensee == "Reflexion":
 			self.imageReflexion.set_from_animation(self.pix_pensee_neutre)
 		if self.etatPensee == "Neutre":
-			self.imageReflexion.set_from_animation(self.pix_pensee_reflexion)
+			self.imageReflexion.set_from_animation(self.pix_pensee_reflexion1)
 		self.imageReflexion.show()
 
 		# On ajuste l'humeur selon l'etat
@@ -86,6 +95,15 @@ class ExpressionFaciale:
 			self.imageHumeur.set_from_animation(self.pix_humeur_joyeux)
 		if self.etatHumeur == "Joyeux":
 			self.imageHumeur.set_from_animation(self.pix_humeur_neutre)		
+		if self.etatHumeur == "Triste":
+			self.imageHumeur.set_from_animation(self.pix_humeur_triste)
+		if self.etatHumeur == "Fatigue":
+			self.imageHumeur.set_from_animation(self.pix_humeur_fatigue)
+		if self.etatHumeur == "Troll":
+			self.imageHumeur.set_from_animation(self.pix_humeur_troll)
+		if self.etatHumeur == "Terminator":
+			self.imageHumeur.set_from_animation(self.pix_humeur_terminator)
+
 		self.imageHumeur.show()	
 
 		# Declaration du timer

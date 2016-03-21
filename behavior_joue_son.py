@@ -18,6 +18,7 @@ mode = modeRecoitSignal
 
 if verbose:
 	rospy.loginfo("Init son")
+
 soundhandle = SoundClient()
 rospy.sleep(1)
 soundhandle.stopAll()
@@ -34,7 +35,6 @@ if mode == modeJoueEnBoucle:
 	while True:
 		if verbose: 
 			rospy.loginfo("Joue un son.")
-		#os.system("mplayer " + soundAssets + nomWav)
 		soundhandle.stopAll()
 		soundhandle.playWave(soundAssets + nomWav)
 		time.sleep(attente)
@@ -51,6 +51,7 @@ if mode == modeRecoitSignal:
 	
 	# On s'inscrit au topic
 	rospy.Subscriber("topic_joue_son", String, callback)
+	rospy.Subscriber("topic_idle_son", String, callback)
 
 	# Puisqu'on attend un signal, il ne faut pas quitter
 	# L'instruction suivante permet de rester dans le programme

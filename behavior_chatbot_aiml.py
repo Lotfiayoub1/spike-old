@@ -3,6 +3,7 @@ import roslib
 import rospy, os, sys
 import time
 import aiml
+from std_msgs.msg import String
 
 rospy.init_node('node_chatbot_aiml', anonymous=True)
 rospy.loginfo("Behavior_chatbot_aiml")
@@ -16,7 +17,7 @@ modeClavier = 1
 modeVocal = 2
 
 langue = francais
-mode = modeClavier
+mode = modeVocal
 
 # L'objet Kernel est l'interface public pour l'interpreteur AIML. 
 k = aiml.Kernel()
@@ -38,11 +39,10 @@ else:
 if verbose:
 	rospy.loginfo("Fin du chargement des fichiers AIML.")
 
-presentation = False
-while True:
-	
-	if mode == modeClavier:
-		# Mode clavier (test)	
+
+if mode == modeClavier:
+	presentation = False
+	while True:
 		if presentation == False:
 			k.respond("SPIKE LOAD VARIABLE ENVIRONNEMENT")
 			reponse= k.respond("SPIKE PRESENTATION1")
@@ -56,8 +56,28 @@ while True:
 		if len(reponse) == 0:
 			reponse = k.respond("SPIKE NE SAIT PAS")	
 		print "Spike> " + reponse
-	else: 
-		# Mode vocal (robot) 
-		#entree = texte recu de la reconnaissance vocale. 
-		reponse = k.respond(entree)
 
+if mode == modeVocal:
+	if verbose:
+		rospy.loginfo("Definition du callback pour les appel aux fichiers AIML.")
+	
+	def callbackIdle(data):
+		if verbose:
+			rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
+		patternAIML = data.data
+		templateAIML = k.respond(patternAIML)
+		if verbose:
+			rospy.loginfo("Reponse du chatbot: " + templateAIML)
+		topic_idle_aiml_template.publish(templateAIML)
+
+	
+	# On s'inscrit au topic
+	rospy.Subscriber("topic_idle_aiml_pattern", String, callbackIdle)
+	topic_idle_aiml_template = rospy.Publisher('topic_idle_aiml_template', String, queue_size=10)
+
+	if verbose:
+		rospy.loginfo("En attente des topics...")	
+
+	# Puisqu'on attend un signal, il ne faut pas quitter
+	# L'instruction suivante permet de rester dans le programme
+	rospy.spin()
