@@ -3,6 +3,8 @@ import roslib
 import rospy, os, sys
 import time
 import wave
+from sound_play.msg import SoundRequest
+from sound_play.libsoundplay import SoundClient
 from std_msgs.msg import String
 
 #from sound_play.msg import SoundRequest
@@ -10,6 +12,10 @@ from std_msgs.msg import String
 
 rospy.init_node('node_parle', anonymous=True)
 rospy.loginfo("Behavior_parle")
+
+soundhandle = SoundClient()
+rospy.sleep(1)
+soundhandle.stopAll()
 
 verbose = True
 
@@ -26,12 +32,12 @@ langue = francais
 
 def parle(entree):
 	if verbose:
-		rospy.loginfo("callback: Message recu: " + entree
-)
+		rospy.loginfo("callback: Message recu: " + entree)
 	if len(entree) > 0: 
-		texte = 'espeak "' + entree + '" -v french -s 150 -p 20' 
+		texte = 'espeak "' + entree + '" -v french -s 100 -p 30' 
 		if verbose:
 			rospy.loginfo(texte)
+		soundhandle.stopAll()
 		os.system(texte)
 		entree = ""
 

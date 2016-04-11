@@ -30,7 +30,7 @@ soundAssets = '/home/ubuntu/catkin_ws/src/spike/src/spike/sons/'
 # TODO: Mettre les sons dans un tableau.
 nomWav = 'robot.wav'
 
-attente = 5 # seconds
+attente = 1 # seconds
 if mode == modeJoueEnBoucle:
 	while True:
 		if verbose: 
@@ -47,7 +47,7 @@ if mode == modeRecoitSignal:
 		if etat == "EtatEveil":
 			soundhandle.stopAll()
 			soundhandle.playWave(soundAssets + nomWav)
-			time.sleep(attente)
+			#time.sleep(attente)
 	
 	# On s'inscrit au topic
 	rospy.Subscriber("topic_joue_son", String, callback)

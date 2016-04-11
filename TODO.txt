@@ -2,23 +2,27 @@
 COURS PROJET------------
 ------PHYSIQUE----------
 
-- A. Mesures et coupe
-- A. Assemblage
-- A. Brancher
-- A. Finition
+- Brancher actuateurs
+- Finition
+	- Hauts-parleurs
+	- Fixer fils interieur
+	- Contours ecran
+	- Fixer antennes
+
 
 -----LOGICIEL-----------
-				
-- Faire un mirroir (apt-get install apt-mirror)
-- Tout repasser IA et faire fonctionner ensemble
+		
+- Peaufiner attention	
 - Behavior_ecoute
-- TEMPS PERDU: Perfectionner fichiers .aiml 
 - A. Behavior_deplacement
+- A. Bug son	
 
 
 ------DOCUMENTATION------
-- UPDATES CONSTANTS: Guide de l'usager (Installation, configuration...)
-- Creer le graphe d'architecture
+- A. Creer un document sur mes fichiers .aiml
+- A. Creer un document sur ma logique floue
+- A. Repasser tout
+
 		
 
 ------TERMINÉ-------------
@@ -52,3 +56,13 @@ COURS PROJET------------
 - X Finir behavior_parle
 - X Behavior idle
 - X Script pour tout demarrer dans des fenetes separees.
+- X Faire un mirroir
+- X Mesures et coupe
+- X Assemblage
+- X Brancher
+- X Tout repasser IA et faire fonctionner ensemble
+- X Led interieur.
+- X Creer le graphe d'architecture
+- X Documenter cafe philo
+- X Attention en logique floue 
+- X Perfectionner fichiers .aiml 
