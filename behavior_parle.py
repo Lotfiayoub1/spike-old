@@ -49,7 +49,7 @@ if mode == modeTest:
 
 if mode == modeRecoitRequetes:
 
-	def callbackIdle(data):
+	def callbackParle(data):
 		if verbose:
 			rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
 		entree = data.data
@@ -57,8 +57,9 @@ if mode == modeRecoitRequetes:
 
 	if verbose:
 		rospy.loginfo("Enregistrement des callbacks")
-	rospy.Subscriber("topic_idle_parle", String, callbackIdle)
-	
+	rospy.Subscriber("topic_idle_parle", String, callbackParle)
+	rospy.Subscriber("topic_parle", String, callbackParle)	
+
 	if verbose:
 		rospy.loginfo("spin sur les callbacks...")	
 	rospy.spin()

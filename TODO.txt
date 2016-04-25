@@ -3,26 +3,22 @@ COURS PROJET------------
 ------PHYSIQUE----------
 
 - Brancher actuateurs
+- Brancher onduleur
 - Finition
-	- Hauts-parleurs
-	- Fixer fils interieur
-	- Contours ecran
-	- Fixer antennes
+	- Sabler
+	- Finir epaules
 
 
 -----LOGICIEL-----------
 		
-- Peaufiner attention	
+- Square
 - Behavior_ecoute
 - A. Behavior_deplacement
-- A. Bug son	
+- SI TEMPS: Bug son	
 
 
 ------DOCUMENTATION------
-- A. Creer un document sur mes fichiers .aiml
-- A. Creer un document sur ma logique floue
-- A. Repasser tout
-
+- FIN. Repasser tout
 		
 
 ------TERMINÉ-------------
@@ -66,3 +62,12 @@ COURS PROJET------------
 - X Documenter cafe philo
 - X Attention en logique floue 
 - X Perfectionner fichiers .aiml 
+- X Kinect
+- X Hauts-parleurs
+- X Fixer antennes
+- X Fixer demie-sphere verte derriere tete
+- X Creer un document sur mes fichiers .aiml
+- X Creer un document sur ma logique floue
+- X Logo
+- X Debugguer attention
+- X Installer module Kinect (ROS)

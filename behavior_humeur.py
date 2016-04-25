@@ -13,7 +13,7 @@ rospy.loginfo("behavior_humeur")
 modeTest = 1
 modeRecoitSignal = 2
 
-mode = modeTest
+mode = modeRecoitSignal
 verbose = True
 
 
@@ -92,9 +92,9 @@ class ExpressionFaciale:
 
 		# On ajuste l'humeur selon l'etat
 		if self.etatHumeur == "Neutre":
-			self.imageHumeur.set_from_animation(self.pix_humeur_joyeux)
+			self.imageHumeur.set_from_animation(self.pix_humeur_neutre)
 		if self.etatHumeur == "Joyeux":
-			self.imageHumeur.set_from_animation(self.pix_humeur_neutre)		
+			self.imageHumeur.set_from_animation(self.pix_humeur_joyeux)		
 		if self.etatHumeur == "Triste":
 			self.imageHumeur.set_from_animation(self.pix_humeur_triste)
 		if self.etatHumeur == "Fatigue":

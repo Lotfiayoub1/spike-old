@@ -38,7 +38,7 @@ def callbackIDLE(data):
 	# Tire un nombre aleatoire (bornes incluses)
 	nb = random.randint(0, 9)
 
-	if nb <= 5:	
+	if nb <= 10:	
 		# Ici, il dit qu'il s'ennuie
 		if verbose:
 			rospy.loginfo("demande ce qu'il faut dire au chatbot quand on s'ennuie")
