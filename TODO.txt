@@ -3,7 +3,6 @@ COURS PROJET------------
 ------PHYSIQUE----------
 
 - Brancher actuateurs
-- Brancher onduleur
 - Finition
 	- Sabler
 	- Finir epaules
@@ -11,7 +10,6 @@ COURS PROJET------------
 
 -----LOGICIEL-----------
 		
-- Square
 - Behavior_ecoute
 - A. Behavior_deplacement
 - SI TEMPS: Bug son	
