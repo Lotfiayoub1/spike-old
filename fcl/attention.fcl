@@ -1,21 +1,21 @@
 FUNCTION_BLOCK attention
  
     VAR_INPUT	
-	Senseur_Deplacement:		REAL; (* RANGE(0 .. 10) *)
-        Senseur_Vision :     		REAL; (* RANGE(0 .. 10) *)
-        Senseur_Ecoute:    		REAL; (* RANGE(0 .. 10) *)
-	Senseur_LRF: 			REAL; (* RANGE(0 .. 10) *)
-	Senseur_Batterie:		REAL; (* RANGE(0 .. 10) *)
-	TempsDepuisDerniereAction: 	REAL; (* Un nombre de secondes *)	
+		Senseur_Deplacement:		REAL; (* RANGE(0 .. 10) *)
+		Senseur_Vision : 	    	REAL; (* RANGE(0 .. 10) *)
+        Senseur_Ecoute:    			REAL; (* RANGE(0 .. 10) *)
+		Senseur_LRF: 				REAL; (* RANGE(0 .. 10) *)
+		Senseur_Batterie:			REAL; (* RANGE(0 .. 10) *)
+		TempsDepuisDerniereAction: 	REAL; (* Un nombre de secondes *)	
     END_VAR
  
     VAR_OUTPUT
         Attention_PileVide:		REAL; (* RANGE(0 .. 10) *)
-        Attention_Conversation:		REAL; (* RANGE(0 .. 10) *)
+        Attention_Conversation:	REAL; (* RANGE(0 .. 10) *)
         Attention_Idle:			REAL; (* RANGE(0 .. 10) *)
-        Attention_Deplacement:		REAL; (* RANGE(0 .. 10) *)
-	Humeur:  			REAL; (* RANGE(0 .. 10) *)
-	Energie: 			REAL; (* RANGE(0 .. 10) *)
+        Attention_Deplacement:	REAL; (* RANGE(0 .. 10) *)
+	Humeur:  					REAL; (* RANGE(0 .. 10) *)
+	Energie: 					REAL; (* RANGE(0 .. 10) *)
     END_VAR
  
     FUZZIFY Senseur_Deplacement
@@ -110,10 +110,10 @@ FUNCTION_BLOCK attention
 	RULE 1: IF (Senseur_Batterie IS Vide) THEN (Attention_PileVide IS Behavior_PileVide);
     END_RULEBLOCK
 
-      RULEBLOCK Attention_Conversation
+    RULEBLOCK Attention_Conversation
         AND:MIN;
         (*ACCU:MAX;*)
-	RULE 1: IF (Senseur_Deplacement IS Arret) AND (Senseur_Ecoute IS NOT Silence) THEN (Attention_Conversation IS Behavior_Conversation);
+	RULE 1: IF (Senseur_Deplacement IS Arret) AND (Senseur_Ecoute IS Bruyant) THEN (Attention_Conversation IS Behavior_Conversation);
     END_RULEBLOCK
 
     RULEBLOCK Attention_Idle
@@ -133,7 +133,7 @@ FUNCTION_BLOCK attention
         AND:MIN;
         (*ACCU:MAX;*)
 	RULE 1: IF (Senseur_Batterie IS Vide) THEN (Humeur IS Triste);
-        RULE 2: IF (Senseur_Deplacement IS NOT Arret) THEN (Humeur IS Neutre);
+    RULE 2: IF (Senseur_Deplacement IS NOT Arret) THEN (Humeur IS Neutre);
 	RULE 3: IF (Senseur_Deplacement IS Arret) AND (Senseur_Ecoute IS NOT Silence) THEN (Humeur IS Joyeux);
 	RULE 4: IF (Senseur_Deplacement IS Arret) AND (TempsDepuisDerniereAction IS Long) THEN (Humeur IS Triste);
     END_RULEBLOCK

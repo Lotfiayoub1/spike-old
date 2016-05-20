@@ -1,0 +1,48 @@
+<aiml version="1.0">
+
+<!-- This category works with the Standard AIML Set -->
+<category>
+<pattern>LOAD AIML ENGLISH</pattern>
+<template>
+
+<!-- Load standard AIML set -->
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/jsd-cegep.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-65percent.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-atomic.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-botmaster.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-brain.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-connect.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-dictionary.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-disconnect.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-dont.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-errors.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-gender.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-geography.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-german.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-gossip.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-hello.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-inactivity.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-inventions.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-knowledge.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-lizards.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-login.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-numbers.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-personality.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-pickup.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-politics.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-profile.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-religion.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-robot.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-sales.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-sextalk.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-sports.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-srai.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-suffixes.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-that.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-turing.aiml</learn>
+<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/std-yesno.aiml</learn>
+
+</template>
+</category>
+
+</aiml>

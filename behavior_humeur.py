@@ -173,9 +173,6 @@ if __name__ == "__main__":
 		expression = ExpressionFaciale()
 		expression.main()
 	
-		# Puisqu'on attend un signal, il ne faut pas quitter
-		# L'instruction suivante permet de rester dans le programme
-#		rospy.spin()
 		
 	
 	

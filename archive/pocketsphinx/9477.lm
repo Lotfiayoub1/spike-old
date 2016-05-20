@@ -1,0 +1,116 @@
+Language model created by QuickLM on Sun May  8 10:16:52 EDT 2016
+Copyright (c) 1996-2010 Carnegie Mellon University and Alexander I. Rudnicky
+
+The model is in standard ARPA format, designed by Doug Paul while he was at MITRE.
+
+The code that was used to produce this language model is available in Open Source.
+Please visit http://www.speech.cs.cmu.edu/tools/ for more information
+
+The (fixed) discount mass is 0.5. The backoffs are computed using the ratio method.
+This model based on a corpus of 17 sentences and 26 words
+
+\data\
+ngram 1=26
+ngram 2=41
+ngram 3=26
+
+\1-grams:
+-0.8487 </s> -0.3010
+-0.8487 <s> -0.2304
+-2.0792 ANDRé -0.2347
+-2.0792 ASIMOV -0.2347
+-2.0792 BONJOUR -0.2347
+-2.0792 BYE -0.2347
+-2.0792 CA -0.2974
+-2.0792 CARINE -0.2347
+-2.0792 CHRISTIANE -0.2347
+-1.7782 COMMENT -0.2937
+-2.0792 DAVID -0.2347
+-2.0792 EST -0.2347
+-2.0792 J'AIME -0.2347
+-2.0792 JE -0.2974
+-2.0792 JS -0.2347
+-2.0792 MON -0.2974
+-2.0792 N'AIME -0.2974
+-2.0792 NOM -0.2974
+-2.0792 OK -0.2937
+-2.0792 PAS -0.2347
+-2.0792 SHANY -0.2347
+-2.0792 SIMON -0.2347
+-1.7782 SPIKE -0.2347
+-2.0792 TU -0.2347
+-2.0792 VA -0.2347
+-2.0792 VAS -0.2974
+
+\2-grams:
+-1.5315 <s> ANDRé 0.0000
+-1.5315 <s> ASIMOV 0.0000
+-1.5315 <s> BONJOUR 0.0000
+-1.5315 <s> BYE 0.0000
+-1.5315 <s> CARINE 0.0000
+-1.5315 <s> CHRISTIANE 0.0000
+-1.2304 <s> COMMENT 0.0000
+-1.5315 <s> DAVID 0.0000
+-1.5315 <s> J'AIME 0.0000
+-1.5315 <s> JE 0.0000
+-1.5315 <s> JS 0.0000
+-1.5315 <s> MON 0.0000
+-1.5315 <s> OK 0.0000
+-1.5315 <s> SHANY 0.0000
+-1.5315 <s> SIMON 0.0000
+-1.5315 <s> SPIKE 0.0000
+-0.3010 ANDRé </s> -0.3010
+-0.3010 ASIMOV </s> -0.3010
+-0.3010 BONJOUR </s> -0.3010
+-0.3010 BYE </s> -0.3010
+-0.3010 CA VA 0.0000
+-0.3010 CARINE </s> -0.3010
+-0.3010 CHRISTIANE </s> -0.3010
+-0.6021 COMMENT CA 0.0000
+-0.6021 COMMENT VAS 0.0000
+-0.3010 DAVID </s> -0.3010
+-0.3010 EST </s> -0.3010
+-0.3010 J'AIME </s> -0.3010
+-0.3010 JE N'AIME 0.0000
+-0.3010 JS </s> -0.3010
+-0.3010 MON NOM 0.0000
+-0.3010 N'AIME PAS 0.0000
+-0.3010 NOM EST 0.0000
+-0.3010 OK SPIKE 0.0000
+-0.3010 PAS </s> -0.3010
+-0.3010 SHANY </s> -0.3010
+-0.3010 SIMON </s> -0.3010
+-0.3010 SPIKE </s> -0.3010
+-0.3010 TU </s> -0.3010
+-0.3010 VA </s> -0.3010
+-0.3010 VAS TU 0.0000
+
+\3-grams:
+-0.3010 <s> ANDRé </s>
+-0.3010 <s> ASIMOV </s>
+-0.3010 <s> BONJOUR </s>
+-0.3010 <s> BYE </s>
+-0.3010 <s> CARINE </s>
+-0.3010 <s> CHRISTIANE </s>
+-0.6021 <s> COMMENT CA
+-0.6021 <s> COMMENT VAS
+-0.3010 <s> DAVID </s>
+-0.3010 <s> J'AIME </s>
+-0.3010 <s> JE N'AIME
+-0.3010 <s> JS </s>
+-0.3010 <s> MON NOM
+-0.3010 <s> OK SPIKE
+-0.3010 <s> SHANY </s>
+-0.3010 <s> SIMON </s>
+-0.3010 <s> SPIKE </s>
+-0.3010 CA VA </s>
+-0.3010 COMMENT CA VA
+-0.3010 COMMENT VAS TU
+-0.3010 JE N'AIME PAS
+-0.3010 MON NOM EST
+-0.3010 N'AIME PAS </s>
+-0.3010 NOM EST </s>
+-0.3010 OK SPIKE </s>
+-0.3010 VAS TU </s>
+
+\end\

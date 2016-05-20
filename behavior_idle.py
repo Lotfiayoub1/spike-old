@@ -25,8 +25,6 @@ def callbackAIML(data):
 	templateAIML = data.data
 	topic_idle_parle.publish(templateAIML)
 
-rospy.Subscriber("topic_idle_aiml_template", String, callbackAIML)
-
 def callbackIDLE(data):
 	if verbose:
 		rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
@@ -49,7 +47,9 @@ def callbackIDLE(data):
 			rospy.loginfo("Envoie message au behavior_joue_son")
 		topic_idle_son.publish("EtatEveil")
 
+
 rospy.Subscriber("topic_idle", String, callbackIDLE)
+rospy.Subscriber("topic_idle_aiml_template", String, callbackAIML)
 
 if verbose:
 	rospy.loginfo("Message que Spike est pret.")

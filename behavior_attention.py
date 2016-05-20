@@ -13,6 +13,7 @@ rospy.loginfo("Behavior_attention")
 
 verbose = True
 
+
 def BACKUPattentionFuzzy2Str(fuzzyValue):
 	# Declaration des valeurs attention dans le .fcl
 	# TODO: Trouver une facon d'aller chercher ces valeurs dans le fichier .fcl directement
@@ -94,6 +95,17 @@ def energieFuzzy2Str(fuzzyValue):
 		return "Neutre"
 	return "Neutre"
 
+rospy.set_param("texte_recu", "")
+#self.texte_recu = ""
+def callbackAssigneTexteEcoute(data):
+	#self.texte_recu = data.data
+	# Un parametre ROS plutot qu'une simple variable est utilisee ici.
+	# La portee d'un callback n'est pas la meme que le reste du programme. 
+	rospy.set_param("texte_recu", data.data)
+	if verbose:
+		rospy.loginfo(rospy.get_caller_id() + "Recu: %s", rospy.get_param("texte_recu"))
+	
+
 if verbose:
 	rospy.loginfo("Initialisation des topics")
 
@@ -104,7 +116,10 @@ topic_humeur = rospy.Publisher('topic_humeur', String, queue_size=10)
 topic_pensee = rospy.Publisher('topic_pensee', String, queue_size=10)
 # Communication avec Behavior_idle 
 topic_idle = rospy.Publisher('topic_idle', String, queue_size=10)
-
+# Communication avec Behavior_chatbot
+topic_attention_conversation = rospy.Publisher('topic_attention_conversation', String, queue_size=10)
+# Enregistrement du callback de behavior_ecoute (pocketsphinx)
+rospy.Subscriber("behavior_ecoute/output", String, callbackAssigneTexteEcoute)
 
 # Chargement du fichier .fcl - Fuzzy Control Language qui contient la logique floue 
 if verbose:
@@ -153,15 +168,28 @@ tempsDerniereBoucle = 0.0
 chronoDebut = datetime.datetime.now()
 chronoFin = chronoDebut
 
+if verbose:
+	rospy.loginfo("Boucle infinie de l'attention...")
+
+tempsSleep = 1
 while True:
 
 	# On commence a compter le temps pour calcul du temps de derniere boucle. 
 	chronoDebut = datetime.datetime.now()
 	
-	# Variables pas encore gerees. On assigne une valeur constante en attendant. 
+	time.sleep(tempsSleep)
+	
+	# Variables d'entree
 	fuzzy_logic_input["Senseur_Deplacement"] = 0.0
 	fuzzy_logic_input["Senseur_Vision"] = 0.0
-	fuzzy_logic_input["Senseur_Ecoute"] = 0.0
+	
+	#print("texte: *"+rospy.get_param("texte_recu")+"*")
+	if (rospy.get_param("texte_recu") == ""):
+		fuzzy_logic_input["Senseur_Ecoute"] = 0.0
+		#print("Senseur_ecoute: 0")
+	else:
+		fuzzy_logic_input["Senseur_Ecoute"] = 10.0
+		#print("Senseur_ecoute: 10")
 	fuzzy_logic_input["Senseur_LRF"] = 10.0
 	fuzzy_logic_input["Senseur_Batterie"] = 10.0
 
@@ -171,8 +199,6 @@ while True:
 	tempsCumule = fuzzy_logic_input["TempsDepuisDerniereAction"]
 	fuzzy_logic_input["TempsDepuisDerniereAction"] =  tempsCumule + tempsDerniereBoucle
 	print(tempsCumule, tempsDerniereBoucle, fuzzy_logic_input["TempsDepuisDerniereAction"])
-
-	#time.sleep(1)
 
 	# Selectionne le behavior qui aura l'attention avec le system de logique flou. 
 	# Selectionne egalement l'humeur
@@ -199,7 +225,7 @@ while True:
 
 	# affichage des valeurs a des fins de debugage
 	#if verbose:
-		#rospy.loginfo("AttentionIdle: " + str(attentionIdleFuzzy) + " - " + attentionIdleStr)
+	rospy.loginfo("AttentionIdle: " + str(attentionIdleFuzzy) + " - " + attentionIdleStr)
 		#rospy.loginfo("AttentionDeplacement: " + str(attentionDeplacementFuzzy) + " - " + attentionDeplacementStr)
 		#rospy.loginfo("AttentionPileVide: " + str(attentionPileVideFuzzy) + " - " + attentionPileVideStr)
 		#rospy.loginfo("AttentionConversation: " + str(attentionConversationFuzzy) + " - " + attentionConversationStr)
@@ -218,11 +244,53 @@ while True:
 	if (humeurStr != oldHumeur):
 		topic_humeur.publish(humeurStr)
 
+	if attentionConversationStr == "Behavior_Conversation":
+		# Lecture et reinitialisation du parametre texte_recu
+		texte_recu = rospy.get_param("texte_recu")
+		rospy.set_param("texte_recu", "")
+		attentionStr = attentionConversationStr
+		chatbot = True
+		# Faire appel a tous les behaviors prioritaires, selon instruction detectee.
+		# Si aucune instruction prioritaire, on fait appel au chatbot.
+		if (texte_recu == "terminator"):
+			# Appel du behavior terminator
+			print("Terminator!")
+			humeurStr = "Terminator"
+			topic_humeur.publish(humeurStr)
+			chatbot = False
+		if (texte_recu == "troll"):
+			# Appel du behavior terminator
+			print("Troll!")
+			humeurStr = "Troll"
+			topic_humeur.publish(humeurStr)
+			chatbot = False
+		if (texte_recu == "spike shutdown"):
+			print("Shutdown!")
+			# Appel OS shutdown
+			os.system("sudo shutdown now")
+			chatbot = False
+		if (texte_recu == "spike reboot"): 
+			print("reboot!")
+			# Appel OS reboot
+			os.system("sudo reboot")
+			chatbot = False
+
+		# Ultimement, si aucune instruction reconnue, appel du chatbot
+		if (chatbot == True):  
+			print("Chatbot")
+			topic_attention_conversation.publish(texte_recu)
+		fuzzy_logic_input["TempsDepuisDerniereAction"] = 0.0
+		#if verbose:
+			#print "Node Attention: Behavior prioritaire: " + attentionStr
+
 	if attentionIdleStr == "Behavior_Idle":
+		attentionStr = attentionIdleStr
 		topic_idle.publish("null")
 		fuzzy_logic_input["TempsDepuisDerniereAction"] = 0.0
-		if verbose:
-			print "Node Attention: Messaage au behavior prioritaire: " + attentionStr
+		
+	if verbose:
+		print "Node Attention: Behavior prioritaire: " + attentionStr
+
 
 	# Si changement behavior ou changement humeur et pas deja en reflexion
 	#if ((attentionStr != oldAttention) or (humeurStr != oldHumeur)) and (etatPensee != "Reflexion"):
@@ -234,6 +302,7 @@ while True:
 	# Mise a jour des valeur de fin pour calcul du temps de derniere boucle. 
 	chronoFin = datetime.datetime.now()
 	tempsTmp = chronoFin - chronoDebut    
-	tempsDerniereBoucle = (tempsTmp.microseconds / 1000000.0) 
+	tempsDerniereBoucle =  10.0 * (tempsTmp.microseconds / 1000000.0)
+	
 	#if verbose:
 	#	rospy.loginfo("Duree derniere boucle: %s", tempsDerniereBoucle)

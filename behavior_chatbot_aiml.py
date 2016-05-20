@@ -16,7 +16,7 @@ anglais = 2
 modeClavier = 1
 modeVocal = 2
 
-langue = francais
+langue = anglais
 mode = modeVocal
 
 # L'objet Kernel est l'interface public pour l'interpreteur AIML. 
@@ -36,6 +36,7 @@ else:
 	# Version francaise
 	k.learn("/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/startup.xml") 
 	k.respond("LOAD AIML FRENCH")
+	
 if verbose:
 	rospy.loginfo("Fin du chargement des fichiers AIML.")
 
@@ -70,10 +71,25 @@ if mode == modeVocal:
 			rospy.loginfo("Reponse du chatbot: " + templateAIML)
 		topic_idle_aiml_template.publish(templateAIML)
 
-	
-	# On s'inscrit au topic
-	rospy.Subscriber("topic_idle_aiml_pattern", String, callbackIdle)
+	def callbackParle(data):
+		if verbose:
+			rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
+		patternAIML = data.data
+		templateAIML = k.respond(patternAIML)
+		if verbose:
+			rospy.loginfo("Reponse du chatbot: " + templateAIML)
+		topic_parle.publish(templateAIML)
+
+	# On souscrit de behavior_attention
+	rospy.Subscriber("topic_attention_conversation", String, callbackParle)
+	# On souscrit au idle_aiml_pattern
+	rospy.Subscriber("topic_idle_aiml_pattern", String, callbackParle)
+	# On publie a behavior_parle
+	topic_parle = rospy.Publisher('topic_parle', String, queue_size=10)
+	# On publie a behavior_idle
 	topic_idle_aiml_template = rospy.Publisher('topic_idle_aiml_template', String, queue_size=10)
+
+
 
 	if verbose:
 		rospy.loginfo("En attente des topics...")	
