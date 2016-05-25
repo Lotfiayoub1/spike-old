@@ -19,9 +19,9 @@ sleep 5
 echo "sound_play..."
 xterm -e "roslaunch sound_play soundplay_node.launch" &
 sleep 3
-#echo "freenect"
-#xterm -e "roslaunch freenect_launch freenect.launch" &
-#sleep 3
+echo "freenect"
+xterm -e "roslaunch freenect_launch freenect.launch" &
+sleep 3
 echo "behavior_ecoute et pocketSphinx"
 xterm -e "roslaunch pocketsphinx behavior_ecoute.launch" &
 sleep 3
@@ -40,11 +40,10 @@ sleep 4
 echo "behavior_idle"
 xterm -e "rosrun spike behavior_idle.py" &
 sleep 2
-
-#echo "behavior_deplacement"
-#xterm -e "rosrun spike behavior_deplacement.py" &
-#sleep 2
-#echo "behavior_attention"
-#xterm -e "rosrun spike behavior_attention.py" &
-#sleep 2
+echo "behavior_deplacement"
+xterm -e "rosrun spike behavior_deplacement.py" &
+sleep 2
+echo "behavior_attention"
+xterm -e "rosrun spike behavior_attention.py" &
+sleep 2
 echo "SPIKE LAUNCHED!"
