@@ -16,7 +16,6 @@ modeRecoitSignal = 2
 mode = modeRecoitSignal
 verbose = True
 
-
 delais = 3000	# va rafraichir toutes les x millisecondes.
 
 # Code vient d'ici:  http://www.pygtk.org/pygtk2tutorial/sec-Images.html#idp5575312 
@@ -26,11 +25,19 @@ class ExpressionFaciale:
 	if verbose == True:
 		rospy.loginfo("Definition de la classe.")
 
-	etatPensee = "Reflexion"
+	etatPensee = "Neutre"
 	etatHumeur = "Neutre"
-
+	etatStatut = ""
+	
+	envoieSpikePret = True
+	# Communication avec Behavior_chatbot
+	topic_attention_conversation = rospy.Publisher('topic_attention_conversation', String, queue_size=10)
+	
 	imageReflexion = gtk.Image()
 	imageHumeur = gtk.Image()
+	statut = gtk.TextView()
+	texte = statut.get_buffer()
+	texte.set_text(etatStatut)
 	canevas = gtk.Fixed()
 
 	pix_pensee_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeNeutre.gif")
@@ -74,21 +81,30 @@ class ExpressionFaciale:
 				self.etatHumeur = "Neutre"
 		if mode == modeRecoitSignal:
 			if verbose: 
-				rospy.loginfo("Timer modeRecoitSignal:Les etat sont changes dans les callback.")
+				rospy.loginfo("Timer modeRecoitSignal")
 
 		self.rafraichir()
 	
 	def rafraichir(self):
 
 		if verbose == True:
-			rospy.loginfo("Redefinition de l'expression faciale...")
+			rospy.loginfo("Redef. Pensee: " + self.etatPensee + " Humeur: " + self.etatHumeur )
+
+		# Execute ce code UNE fois, au debut.  ChatBot - Spike est pret!
+		if self.envoieSpikePret == True:
+			self.envoieSpikePret = False
+			if verbose:
+				rospy.loginfo("Envoie le message que Spike est pret au chatbot.")
+			self.topic_attention_conversation.publish("SPIKE PRET")
 
 		# On ajuste la pensee selon l'etat	
 		if self.etatPensee == "Reflexion":
-			self.imageReflexion.set_from_animation(self.pix_pensee_neutre)
-		if self.etatPensee == "Neutre":
 			self.imageReflexion.set_from_animation(self.pix_pensee_reflexion1)
+		if self.etatPensee == "Neutre":
+			self.imageReflexion.set_from_animation(self.pix_pensee_neutre)
 		self.imageReflexion.show()
+		# On reinitialise pour le prochain rafraichissement
+		self.etatPensee = "Neutre"
 
 		# On ajuste l'humeur selon l'etat
 		if self.etatHumeur == "Neutre":
@@ -103,14 +119,22 @@ class ExpressionFaciale:
 			self.imageHumeur.set_from_animation(self.pix_humeur_troll)
 		if self.etatHumeur == "Terminator":
 			self.imageHumeur.set_from_animation(self.pix_humeur_terminator)
-
 		self.imageHumeur.show()	
+		# On reinitialise pour le prochain rafraichissement
+		self.etatHumeur = "Neutre"
+
+		# mise a jour du message a ecran
+		self.texte.set_text(self.etatStatut)
+		self.statut.set_buffer(self.texte) 
+		self.statut.show()
+		# On reinitialise pour le prochain rafraichissement
+		self.etatStatut = ""
 
 		# Declaration du timer
 		gtk.timeout_add(delais, self.my_timer)
 
-		if verbose == True:
-			rospy.loginfo("Fin de la redefinition de l'expression faciale...")
+		#if verbose == True:
+		#	rospy.loginfo("Fin de la redefinition de l'expression faciale...")
 
 
 	def __init__(self):
@@ -133,6 +157,7 @@ class ExpressionFaciale:
 		self.imageReflexion.set_from_animation(self.pix_pensee_neutre)
 		self.canevas.put(self.imageReflexion, 0, 0)
 		self.canevas.put(self.imageHumeur, 0, 256)
+		self.canevas.put(self.statut, 100, 50)
 		self.window.add(self.canevas)
 		self.canevas.show()
 		self.rafraichir()
@@ -151,21 +176,29 @@ if __name__ == "__main__":
 				rospy.loginfo("Mode RecoiSignal... Definition des callbacks.")
 	
 			def callbackPensee(data):
+				expression.etatPensee = data.data
 				if verbose:
-					rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
-				expression.etatPensee = data.data	
+					rospy.loginfo("Reflexion: %s", expression.etatPensee)
+	
 		
 			def callbackHumeur(data):
-				if verbose:
-					rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
 				expression.etatHumeur = data.data
-	
+				if verbose:
+					rospy.loginfo("Humeur: %s", expression.etatHumeur)
+
+			def callbackStatut(data):
+				expression.etatStatut = data.data
+				if verbose:
+					rospy.loginfo("Statut: %s", expression.etatStatut)
+
 			if verbose == True:
 				rospy.loginfo("Mode RecoiSignal... Enregistrement des Subscribers.")
 		
 			# On s'inscrit aux topics
 			rospy.Subscriber("topic_humeur", String, callbackHumeur)
 			rospy.Subscriber("topic_pensee", String, callbackPensee)
+			rospy.Subscriber("behavior_ecoute/output", String, callbackStatut)
+
 	
 		if verbose == True:
 			rospy.loginfo("Appel de la definition de l'expression faciale.")

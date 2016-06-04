@@ -1,67 +1,8 @@
 ﻿TODO: JSD
 COURS PROJET------------
+
+------LOGICIEL----------
+
 ------PHYSIQUE----------
+- Sabler
 
-- Finition
-	- Sabler
-
-
------LOGICIEL-----------
-		
-- Behavior_ecoute
-
-
-------DOCUMENTATION------
-- FIN. Repasser tout
-		
-
-------TERMINÉ-------------
-- X Lire documentation AIML
-- X Installer Ubuntu LTS Trusty
-- X Installer LXDE GUI
-- X Installer ROS Turtle Jade	
-- X Recompiler Catkin			
-- X Confirmer stock 
-- X Commander stock.
-- X Guide AIML
-- X Démonter UdeS
-- X Connexion Internet maison
-- X Nettoyer UdeS
-- X Refaire plan
-- x Behavior_chatbot_AIML	
-- X Débugguer AIML français. 
-- X Behavior_son		
-- X Voix.	 		        		        
-- X Faire un fichier .sh qui lance la procedure de demarrage.
-- X Installer voix francais (eSpeak) 
-- X Guide Ubuntu Trusty Tahr
-- X Finaliser de coder Attention
-- X Faire fonctionner écran.
-- X Commander pièces manquantes
-- X Finaliser Behavior_expressions_faciales
-- X Messages entre noeuds	
-- X Installer et reparer hauts-parleurs
-- X Fabriquer la tete
-- X Faire quelques expressions faciales et pensee en GIMP et ajuster script
-- X Finir behavior_parle
-- X Behavior idle
-- X Script pour tout demarrer dans des fenetes separees.
-- X Faire un mirroir
-- X Mesures et coupe
-- X Assemblage
-- X Brancher
-- X Tout repasser IA et faire fonctionner ensemble
-- X Led interieur.
-- X Creer le graphe d'architecture
-- X Documenter cafe philo
-- X Attention en logique floue 
-- X Perfectionner fichiers .aiml 
-- X Kinect
-- X Hauts-parleurs
-- X Fixer antennes
-- X Fixer demie-sphere verte derriere tete
-- X Creer un document sur mes fichiers .aiml
-- X Creer un document sur ma logique floue
-- X Logo
-- X Debugguer attention
-- X Installer module Kinect (ROS)

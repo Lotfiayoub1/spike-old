@@ -233,22 +233,23 @@ while True:
 		#rospy.loginfo("Energie: " + str(energieFuzzy)  + " - " + energieStr)	
 
 	# On reinitialise la pensee a neutre si ca fait un moment. 
-	if (etatPensee == "Reflexion"):
-		tempsReflexion = tempsReflexion + tempsDerniereBoucle
-	if (etatPensee == "Reflexion") and (tempsReflexion >= tempsReflexionMax): 
-		etatPensee = "Neutre"
-		topic_pensee.publish(etatPensee)
-		tempsReflexion = 0
+	#if (etatPensee == "Reflexion"):
+	#	tempsReflexion = tempsReflexion + tempsDerniereBoucle
+	#if (etatPensee == "Reflexion") and (tempsReflexion >= tempsReflexionMax): 
+	#	etatPensee = "Neutre"
+	#	topic_pensee.publish(etatPensee)
+	#	tempsReflexion = 0
 	
 	# On met a jour l'humeur dans l'interface
-	if (humeurStr != oldHumeur):
-		topic_humeur.publish(humeurStr)
+	#if (humeurStr != oldHumeur):
+	#	topic_humeur.publish(humeurStr)
 
 	if attentionConversationStr == "Behavior_Conversation":
 		# Lecture et reinitialisation du parametre texte_recu
 		texte_recu = rospy.get_param("texte_recu")
 		rospy.set_param("texte_recu", "")
 		attentionStr = attentionConversationStr
+		topic_pensee.publish("Reflexion")
 		chatbot = True
 		# Faire appel a tous les behaviors prioritaires, selon instruction detectee.
 		# Si aucune instruction prioritaire, on fait appel au chatbot.
@@ -257,11 +258,30 @@ while True:
 			print("Terminator!")
 			humeurStr = "Terminator"
 			topic_humeur.publish(humeurStr)
+			topic_joue_son.publish(humeurStr)
 			chatbot = False
 		if (texte_recu == "troll"):
 			# Appel du behavior terminator
 			print("Troll!")
 			humeurStr = "Troll"
+			topic_humeur.publish(humeurStr)
+			chatbot = False
+		if (texte_recu == "sad"):
+			# Appel du behavior terminator
+			print("triste!")
+			humeurStr = "Triste"
+			topic_humeur.publish(humeurStr)
+			chatbot = False
+		if (texte_recu == "tired"):
+			# Appel du behavior terminator
+			print("Tired!")
+			humeurStr = "Fatigue"
+			topic_humeur.publish(humeurStr)
+			chatbot = False
+		if (texte_recu == "happy"):
+			# Appel du behavior terminator
+			print("Happy!")
+			humeurStr = "Joyeux"
 			topic_humeur.publish(humeurStr)
 			chatbot = False
 		if (texte_recu == "spike shutdown"):
@@ -278,6 +298,8 @@ while True:
 		# Ultimement, si aucune instruction reconnue, appel du chatbot
 		if (chatbot == True):  
 			print("Chatbot")
+			humeurStr = "Joyeux"
+			topic_humeur.publish(humeurStr)
 			topic_attention_conversation.publish(texte_recu)
 		fuzzy_logic_input["TempsDepuisDerniereAction"] = 0.0
 		#if verbose:

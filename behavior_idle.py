@@ -36,7 +36,7 @@ def callbackIDLE(data):
 	# Tire un nombre aleatoire (bornes incluses)
 	nb = random.randint(0, 9)
 
-	if nb <= 10:	
+	if nb <= 5:	
 		# Ici, il dit qu'il s'ennuie
 		if verbose:
 			rospy.loginfo("demande ce qu'il faut dire au chatbot quand on s'ennuie")
@@ -50,11 +50,6 @@ def callbackIDLE(data):
 
 rospy.Subscriber("topic_idle", String, callbackIDLE)
 rospy.Subscriber("topic_idle_aiml_template", String, callbackAIML)
-
-if verbose:
-	rospy.loginfo("Message que Spike est pret.")
-
-topic_idle_aiml_pattern.publish("SPIKE PRET")
 
 rospy.spin()
 

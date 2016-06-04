@@ -35,7 +35,7 @@ if mode == modeJoueEnBoucle:
 	while True:
 		if verbose: 
 			rospy.loginfo("Joue un son.")
-		soundhandle.stopAll()
+		#soundhandle.stopAll()
 		soundhandle.playWave(soundAssets + nomWav)
 		time.sleep(attente)
 
@@ -44,10 +44,12 @@ if mode == modeRecoitSignal:
 		if verbose:
 			rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
 		etat = data.data
+		#soundhandle.stopAll()
 		if etat == "EtatEveil":
-			soundhandle.stopAll()
-			soundhandle.playWave(soundAssets + nomWav)
+			#soundhandle.playWave(soundAssets + nomWav)
 			#time.sleep(attente)
+		if etat == "Terminator":
+			#soundhandle.playWave(soundAssets + "terminator.wav")
 	
 	# On s'inscrit au topic
 	rospy.Subscriber("topic_joue_son", String, callback)
