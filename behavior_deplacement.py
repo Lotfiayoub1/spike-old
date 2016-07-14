@@ -10,11 +10,16 @@ modeTest = 1
 modeRobot = 2
 mode = modeTest
 
+verbose = True
+
 while True:
 	if mode == modeRobot:
 		# modeRobot
 		# Bloque sur l'attente de la reponse 
 	else:
 		# modeTest
-		# je ne sais pas encore ce qu'il y aura ici		
+		if verbose:
+			rospy.loginfo("Boucle deplacement... ")
+		time.sleep(1000)
+				
 
