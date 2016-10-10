@@ -34,4 +34,5 @@ xterm -e "rosrun spike behavior_attention.py" &
 #export DISPLAY=':0'
 echo "behavior_humeur"
 xterm -e "rosrun spike behavior_humeur.py" &
+
 echo "SPIKE LAUNCHED!"

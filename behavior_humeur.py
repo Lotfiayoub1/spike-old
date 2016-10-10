@@ -1,21 +1,20 @@
 #!/usr/bin/env python
 
-import rospy
+import rospy, numpy, math
 #import pygtk
 #pygtk.require('2.0')
+#from mpltools import style
 import gtk
-#import gtk.glade
+
 from std_msgs.msg import String
-#import matplotlib
-#matplotlib.use('Agg')
 from matplotlib.backends.backend_gtk import FigureCanvasGTK as FigureCanvas
+import matplotlib
 from matplotlib.figure import Figure
-#from matplotlib import pylab 
-#import matplotlib.animation as animation
 from numpy import arange, sin, pi
-#import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import matplotlib.pyplot as plt
 
-
+#matplotlib.use('TkAgg')
 
 rospy.init_node('node_humeur', anonymous=True)
 rospy.loginfo("behavior_humeur")
@@ -26,12 +25,29 @@ modeRecoitSignal = 2
 mode = modeRecoitSignal
 verbose = True
 
-delais = 3000    # va rafraichir toutes les x millisecondes.
+delais = 1000    # va rafraichir toutes les x millisecondes.
 
-# Code vient d'ici:  http://www.pygtk.org/pygtk2tutorial/sec-Images.html#idp5575312
+# Variables qui permettent le chargement des donnees du SNN. 
+#frames_x = []
+#frames_y = []
+temps_max = 20
+temps = 1
+frames_x = numpy.arange(temps_max)
+frames_y = numpy.zeros(temps_max)
+
+# Plot
+#figure = Figure(figsize=(1280,125), facecolor='black')
+#ax = figure.add_subplot(111, facecolor='black')
+figure = Figure(figsize=(1280,125))
+ax = figure.add_subplot(111)
+line, = ax.plot(0,100)
+ax.set_ylim(-0.2,1.0)    # mv:  -0.5 a 1
+ax.set_xlim(0,temps_max)     
+
+
 
 class ExpressionFaciale:
-
+    # Code vient d'ici:  http://www.pygtk.org/pygtk2tutorial/sec-Images.html#idp5575312
     if verbose == True:
         rospy.loginfo("Definition de la classe.")
 
@@ -46,19 +62,48 @@ class ExpressionFaciale:
     # Images et textes 
     imageReflexion = gtk.Image()
     imageHumeur = gtk.Image()
+    imageFiller = gtk.Image()
     statut = gtk.TextView()
+    statut.modify_base(gtk.STATE_NORMAL, gtk.gdk.color_parse('#000000'))
+    statut.modify_text(gtk.STATE_NORMAL, gtk.gdk.color_parse('#FFFFFF'))
     texte = statut.get_buffer()
     texte.set_text(etatStatut)
 
-    # Plot
-    figure = Figure(figsize=(1280,256))
-    ax = figure.add_subplot(111)
-    t = arange(0.0, 3.0, 0.01)
-    s = sin(2*pi*t)
-    ax.plot(t,s)
-    plotCanevas = FigureCanvas(figure)  
+    def update_line(data):
+        #temps = len(frames_y)
+        
+        #frames_y.append(math.sin(temps*10))
+        #frames_x.append(temps)
+        #print "update:" + str(frames_y)
+        #if temps > 0:
+        line.set_ydata(frames_y)
+        line.set_xdata(frames_x)
+        return line, 
 
-    
+    # Fonctions originales qui fonctionnent avec FuncAnimation
+    #def update_line(data):
+    #    print "update:" + str(data)
+    #    line.set_ydata(data)
+    #    return line, 
+
+    #def data_gen():
+    #    while True:
+    #        yield numpy.random.rand(10)
+
+
+    #ax.plot(t,s)
+    plotCanevas = FigureCanvas(figure) 
+ 
+    plt.show(block=False)
+    ani = animation.FuncAnimation(figure, update_line, interval=delais)
+    # Originale
+    #ani = animation.FuncAnimation(figure, update_line,data_gen, interval=100)
+ 
+    plt.style.use('dark_background')
+
+    pix_filler = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/imageFiller.jpeg")
+    imageFiller.set_from_animation(pix_filler)
+
     pix_pensee_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeNeutre.gif")
     pix_pensee_reflexion1 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion1.gif")
     pix_pensee_reflexion2 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion2.gif")
@@ -71,6 +116,8 @@ class ExpressionFaciale:
     pix_humeur_triste = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurTriste.gif")
     pix_humeur_troll = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurTroll.png")
     pix_humeur_terminator = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurTerminator.png")
+
+
 
     def expression(self, widget, data=None):
         print "Expression faciale"
@@ -154,6 +201,13 @@ class ExpressionFaciale:
         # Declaration du timer
         gtk.timeout_add(delais, self.my_timer)
 
+        print "Rafraichir"
+        #line, = self.ax.plot(numpy.random.rand(10))
+        #data = numpy.random.rand(1,100)
+
+        self.plotCanevas.show()
+        #plt.show()
+        
         #if verbose == True:
         #    rospy.loginfo("Fin de la redefinition de l'expression faciale...")
 
@@ -169,6 +223,7 @@ class ExpressionFaciale:
         self.window.connect("delete_event", self.delete_event)
         self.window.set_border_width(1)
         self.window.set_title("SPIKE")
+    
         #self.window.fullscreen()
         self.window.resize(1280, 1024)
         
@@ -184,19 +239,18 @@ class ExpressionFaciale:
         #self.plotCanevas.show()
         #fixed.show()
      
-        
         #self.window.add(self.imageHumeur)
         #self.window.add(self.statut)
-
+        
         vbox = gtk.VBox(False, 0)
-        ##self.plotCanevas.show()
         vbox.pack_start(self.plotCanevas)
-        #vbox.pack_start(self.statut)
         vbox.pack_start(self.imageHumeur, False, False)
+        vbox.pack_start(self.imageFiller, False, False)
+        vbox.pack_start(self.statut)
 
         self.window.add(vbox)
         self.window.show_all()
-        #self.rafraichir()
+        self.rafraichir()
 
 
     def main(self):
@@ -211,28 +265,55 @@ if __name__ == "__main__":
             if verbose == True:
                 rospy.loginfo("Mode RecoiSignal... Definition des callbacks.")
 
-            def callbackPensee(data):
-                expression.etatPensee = data.data
-                if verbose:
-                    rospy.loginfo("Reflexion: %s", expression.etatPensee)
-
-
             def callbackHumeur(data):
                 expression.etatHumeur = data.data
-                if verbose:
+                if verbose == True:
                     rospy.loginfo("Humeur: %s", expression.etatHumeur)
 
             def callbackStatut(data):
                 expression.etatStatut = data.data
-                if verbose:
+                if verbose == True:
                     rospy.loginfo("Statut: %s", expression.etatStatut)
 
+            def callbackPensee(data):
+                global temps, temps_max
+                global frames_y, frames_x
+                if verbose:
+                    rospy.loginfo(rospy.get_caller_id() + "Le callback a recu: %s", data.data)  
+                #temps = len(frames_y)
+                decoded = float(data.data)   # numpy.fromstring(data.data, 'Float32')   # Default datatype: float
+                if decoded != 0.0:
+                    #frames_y.append(decoded)
+                    #frames_x.append(temps)
+                    frames_y[temps] = decoded
+                    temps = temps + 1
+                    #frames_x[temps] = temps
+                print "CALLBACK"
+                print frames_y
+                print frames_x
+
+                if temps == temps_max:
+                    frames_y = numpy.zeros(temps_max)
+                    temps = 0
+                    #del frames_x[:]
+                    #del frames_y[:]
+                #del frames[:] 
+                #for i in range(0,len(data.data)):
+                #    frames.append(data.data)
+
+            # Ne sert plus. Ancienne version  
+            def callbackPenseeAncienneVersion(data):
+                expression.etatPensee = data.data
+                if verbose == True:
+                    rospy.loginfo("Reflexion: %s", expression.etatPensee)
+            
+            
             if verbose == True:
                 rospy.loginfo("Mode RecoiSignal... Enregistrement des Subscribers.")
 
             # On s'inscrit aux topics
             rospy.Subscriber("topic_humeur", String, callbackHumeur)
-            rospy.Subscriber("topic_pensee", String, callbackPensee)
+            rospy.Subscriber("topic_out_SNN_AmbianceSNN", String, callbackPensee)
             rospy.Subscriber("behavior_ecoute/output", String, callbackStatut)
 
 

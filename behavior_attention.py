@@ -114,6 +114,11 @@ topic_joue_son = rospy.Publisher('topic_joue_son', String, queue_size=10)
 # Communication avec Behavior_humeur (visage)
 topic_humeur = rospy.Publisher('topic_humeur', String, queue_size=10)
 topic_pensee = rospy.Publisher('topic_pensee', String, queue_size=10)
+
+# Ajoute par Patrick
+topic_wiki = rospy.Publisher('topic_wiki', String, queue_size=10)
+# Fin de l'ajout
+
 # Communication avec Behavior_idle 
 topic_idle = rospy.Publisher('topic_idle', String, queue_size=10)
 # Communication avec Behavior_chatbot
@@ -253,13 +258,13 @@ while True:
 		chatbot = True
 		# Faire appel a tous les behaviors prioritaires, selon instruction detectee.
 		# Si aucune instruction prioritaire, on fait appel au chatbot.
-		if (texte_recu == "terminator"):
-			# Appel du behavior terminator
-			print("Terminator!")
-			humeurStr = "Terminator"
-			topic_humeur.publish(humeurStr)
-			topic_joue_son.publish(humeurStr)
-			chatbot = False
+#		if (texte_recu == "terminator"):
+#			# Appel du behavior terminator
+#			print("Terminator!")
+#			humeurStr = "Terminator"
+#			topic_humeur.publish(humeurStr)
+#			topic_joue_son.publish(humeurStr)
+#			chatbot = False
 		if (texte_recu == "troll"):
 			# Appel du behavior terminator
 			print("Troll!")
@@ -294,6 +299,14 @@ while True:
 			# Appel OS reboot
 			os.system("sudo reboot")
 			chatbot = False
+
+		# Ajoute par Patrick
+		if (texte_recu == 'terminator'):
+			print('Learning something from wiki')
+			learnstring = 'What is hello world'
+			topic_wiki.publish(learnstring)
+			chatbot = False
+		# Fin de l'ajout
 
 		# Ultimement, si aucune instruction reconnue, appel du chatbot
 		if (chatbot == True):  

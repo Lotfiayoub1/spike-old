@@ -61,7 +61,11 @@ if mode == modeRecoitRequetes:
 	if verbose:
 		rospy.loginfo("Enregistrement des callbacks")
 	rospy.Subscriber("topic_idle_parle", String, callbackParle)
-	rospy.Subscriber("topic_parle", String, callbackParle)	
+	rospy.Subscriber("topic_parle", String, callbackParle)
+	
+	# Ajoute par Patrick
+	rospy.Subscriber('topic_speak_wiki', String, callbackParle)
+	# Fin de l'ajout	
 
 	if verbose:
 		rospy.loginfo("spin sur les callbacks...")	
