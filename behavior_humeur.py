@@ -13,7 +13,7 @@ from matplotlib.figure import Figure
 from numpy import arange, sin, pi
 import matplotlib.animation as animation
 import matplotlib.pyplot as plt
-
+import pickle
 #matplotlib.use('TkAgg')
 
 rospy.init_node('node_humeur', anonymous=True)
@@ -25,26 +25,17 @@ modeRecoitSignal = 2
 mode = modeRecoitSignal
 verbose = True
 
-delais = 1000    # va rafraichir toutes les x millisecondes.
-
-# Variables qui permettent le chargement des donnees du SNN. 
-#frames_x = []
-#frames_y = []
-temps_max = 20
-temps = 1
-frames_x = numpy.arange(temps_max)
-frames_y = numpy.zeros(temps_max)
+delais = 5000    # va rafraichir toutes les x millisecondes.
 
 # Plot
-#figure = Figure(figsize=(1280,125), facecolor='black')
-#ax = figure.add_subplot(111, facecolor='black')
+temps_max = 150
 figure = Figure(figsize=(1280,125))
-ax = figure.add_subplot(111)
-line, = ax.plot(0,100)
+figure.patch.set_facecolor('black')
+ax = figure.add_subplot(111, facecolor='black')
+line, = ax.plot(0,2)
 ax.set_ylim(-0.2,1.0)    # mv:  -0.5 a 1
-ax.set_xlim(0,temps_max)     
-
-
+ax.set_xlim(0,temps_max)    
+ax.set_axis_bgcolor('black')
 
 class ExpressionFaciale:
     # Code vient d'ici:  http://www.pygtk.org/pygtk2tutorial/sec-Images.html#idp5575312
@@ -70,14 +61,24 @@ class ExpressionFaciale:
     texte.set_text(etatStatut)
 
     def update_line(data):
-        #temps = len(frames_y)
-        
-        #frames_y.append(math.sin(temps*10))
-        #frames_x.append(temps)
-        #print "update:" + str(frames_y)
-        #if temps > 0:
-        line.set_ydata(frames_y)
-        line.set_xdata(frames_x)
+
+        print "Reading SNN data from pickle files."
+        try:
+            # Open the files (_v for voltage and _t for time) 
+            pk1_v = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/SonGamma_learned_v.pk1", 'rb')
+            pk1_t = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/SonGamma_learned_t.pk1", 'rb')
+            # Load the data in some arrays
+            data_v = pickle.load(pk1_v)
+            data_t = pickle.load(pk1_t)   
+            # Close the files     
+            pk1_v.close()
+            pk1_t.close()
+            # Assing the data to the axes of the graph. 
+            line.set_ydata(data_v[0])
+            line.set_xdata(data_t)
+        except:
+            print "Error reading Pickle files"
+
         return line, 
 
     # Fonctions originales qui fonctionnent avec FuncAnimation
@@ -96,8 +97,6 @@ class ExpressionFaciale:
  
     plt.show(block=False)
     ani = animation.FuncAnimation(figure, update_line, interval=delais)
-    # Originale
-    #ani = animation.FuncAnimation(figure, update_line,data_gen, interval=100)
  
     plt.style.use('dark_background')
 
@@ -195,18 +194,10 @@ class ExpressionFaciale:
         # On reinitialise pour le prochain rafraichissement
         self.etatStatut = ""
 
-        #self.plotCanevas.show()
-        #plt.show()
-
         # Declaration du timer
         gtk.timeout_add(delais, self.my_timer)
 
-        print "Rafraichir"
-        #line, = self.ax.plot(numpy.random.rand(10))
-        #data = numpy.random.rand(1,100)
-
         self.plotCanevas.show()
-        #plt.show()
         
         #if verbose == True:
         #    rospy.loginfo("Fin de la redefinition de l'expression faciale...")
@@ -275,45 +266,22 @@ if __name__ == "__main__":
                 if verbose == True:
                     rospy.loginfo("Statut: %s", expression.etatStatut)
 
+            # Ne sert plus depuis que l'on recoit la pensee avec un fichier pickle. 
             def callbackPensee(data):
                 global temps, temps_max
                 global frames_y, frames_x
                 if verbose:
                     rospy.loginfo(rospy.get_caller_id() + "Le callback a recu: %s", data.data)  
-                #temps = len(frames_y)
-                decoded = float(data.data)   # numpy.fromstring(data.data, 'Float32')   # Default datatype: float
-                if decoded != 0.0:
-                    #frames_y.append(decoded)
-                    #frames_x.append(temps)
-                    frames_y[temps] = decoded
-                    temps = temps + 1
-                    #frames_x[temps] = temps
-                print "CALLBACK"
-                print frames_y
-                print frames_x
-
-                if temps == temps_max:
-                    frames_y = numpy.zeros(temps_max)
-                    temps = 0
-                    #del frames_x[:]
-                    #del frames_y[:]
-                #del frames[:] 
-                #for i in range(0,len(data.data)):
-                #    frames.append(data.data)
-
-            # Ne sert plus. Ancienne version  
-            def callbackPenseeAncienneVersion(data):
-                expression.etatPensee = data.data
-                if verbose == True:
-                    rospy.loginfo("Reflexion: %s", expression.etatPensee)
-            
+                decoded = numpy.fromstring(data.data)   # Default datatype: float
+                frame_y = decoded
+                frame_x = numpy.zeros(len(decoded))
             
             if verbose == True:
                 rospy.loginfo("Mode RecoiSignal... Enregistrement des Subscribers.")
 
             # On s'inscrit aux topics
             rospy.Subscriber("topic_humeur", String, callbackHumeur)
-            rospy.Subscriber("topic_out_SNN_AmbianceSNN", String, callbackPensee)
+            #rospy.Subscriber("topic_out_SNN_AmbianceSNN", String, callbackPensee)
             rospy.Subscriber("behavior_ecoute/output", String, callbackStatut)
 
 

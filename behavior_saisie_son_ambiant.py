@@ -28,10 +28,10 @@ CHANNELS = 1
 # Frequence de 44100 ou 16000
 RATE = 16000
 # Nombre de frames lus par buffer (1024)
-CHUNK = 100   # 16
+CHUNK = 50   # 16
 #RECORD_SECONDS = 3
 # Nombre de frames a lire (800)
-NOFFRAMES = 10000    
+NOFFRAMES = 10000   
 # Pour ne prendre qu'une partie des donnees.  Permet d'alleger les donnees.
 ECHANTILLON = 1   # On capture une valeur tous les x frames. (8)
  
@@ -39,7 +39,7 @@ rospy.init_node('node_saisie_son_ambiant', anonymous=True)
 rospy.loginfo("Behavior_saisie_son_ambiant")
 
 if mode == ROS or mode == ROSBAG:
-    topic_son_ambiant = rospy.Publisher('topic_in_SNN_AmbianceSNN', String, queue_size=100)
+    topic_son_ambiant = rospy.Publisher('topic_in_SNN_SonGamma', String, queue_size=100)
 
 frames = []
 
@@ -60,7 +60,6 @@ def cycleRecording():
       
     #print "Type of frames is " + str(type(frames))
 
-    print "Publie: "
     r = rospy.Rate(500) #  hz
     for i in range(0, NOFFRAMES):
         data = stream.read(CHUNK)

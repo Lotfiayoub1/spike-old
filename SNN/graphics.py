@@ -12,11 +12,11 @@ import matplotlib.pyplot as plt
 
 def displaySpikeMonitorInfo(spikeMonitor):
     print "Information sur les spikes en SORTIE"
-    print "Nombre total de spikes: " + str(spikeMonitor.num_spikes)
-    nb = len(spikeMonitor.count)
-    print "Total des spikes par neurones: " + str(nb)
-    for j in range(0,nb):
-        print "spike: " + str(j) + " " + str(spikeMonitor.count[j])
+    print "Nombre total de spikes------------------: " + str(spikeMonitor.num_spikes)
+    #nb = len(spikeMonitor.count)
+    #print "Total des spikes par neurones: " + str(nb)
+    #for j in range(0,nb):
+    #    print "spike: " + str(j) + " " + str(spikeMonitor.count[j])
 
 def plotVoltTemps(statemon, debut, fin):
     title("Voltage des neurones ENTREES fonction du temps (Neurones de " + str(debut) + " a " + str(fin) + ")")
