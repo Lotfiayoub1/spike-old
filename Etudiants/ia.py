@@ -6,7 +6,7 @@ from std_msgs.msg import String
 import random
 
 miseAJour = True
-peutSeDeplacer = False
+peutSeDeplacer = "F"
 directionDerniereDemande = "N"
 
 # On defini une fonction callback.  Elle va s'appeler a toutes les fois que le topic recoit quelque chose.
@@ -45,14 +45,13 @@ print("Not Running")
 rospy.Subscriber("topic_actu_reponseactiondeplacement", String, callback_reponseactiondeplacement)
 while True:
     #S il  y a une mise a jour des informations.
-    print("Running...")
     if miseAJour:
 	print("Mise a jour...")
         miseAJour = False
 
         # Ici on fait notre intelligence
-
-        if peutSeDeplacer:
+	print(peutSeDeplacer)
+        if peutSeDeplacer == "T":
             if directionDerniereDemande == "N":
                 pub_ia_ecrireconsole.Publish("Le robot s'est deplace au Nord")
             elif directionDerniereDemande == "E":
@@ -65,17 +64,22 @@ while True:
                 pub_ia_ecrireconsole.Publish("Une erreur s'est produite")
         else:
             random = random.randint(1,4)
+	    print(random)
 
             if random == 1:
+		print("On demande aux actuateurs d aller au Nord")
                 pub_ia_actiondeplacement.publish("N")
                 directionDerniereDemande = "N"
             elif random == 2:
+		print("On demande aux actuateurs d aller a l Est")
                 pub_ia_actiondeplacement.publish("E")
                 directionDerniereDemande = "E"
             elif random == 3:
+		print("On demande aux actuateurs d aller au Sud")
                 pub_ia_actiondeplacement.publish("S")
                 directionDerniereDemande = "S"
             elif random == 4:
+		print("On demande aux actuateurs d aller a l Ouest")
                 pub_ia_actiondeplacement.publish("O")
                 directionDerniereDemande = "O"
             else:

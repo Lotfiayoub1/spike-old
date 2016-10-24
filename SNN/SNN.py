@@ -93,7 +93,8 @@ def SNN():
     synapses = []               # Array of synapses
     INPUT_LAYER = 0             # input layer index
     OUTPUT_LAYER = hidden_layers + 2 - 1    # Output layer index:  Hidden layer +  1 input layer + 1 output layer (- 1 because the index starts at 0).
-    postsynaptic = "v_post += " + synapse_weight    # Synapse weight
+    #postsynaptic = "v_post += " + synapse_weight    # Synapse weight
+    postsynaptic = "v += " + synapse_weight    # Synapse weight
     
     # Creation of the neurons and synapses structures
     for layer in range(INPUT_LAYER,OUTPUT_LAYER+1): 
@@ -112,8 +113,8 @@ def SNN():
                 print "Assigning HIDDEN layer: " + str(layer)
         # Synapses
         if layer > INPUT_LAYER:
-            synapses.append(Synapses(neurons[layer-1], neurons[layer], on_pre=postsynaptic))           
-            synapses[layer-1].connect()
+            synapses.append(Synapses(neurons[layer-1], neurons[layer], on_pre=postsynaptic))          
+            synapses[layer-1].connect() 
             if verbose: 
                 print "Assigning SYNAPSES between layer: " + str(layer-1) + " and layer " + str(layer)
     
@@ -124,9 +125,16 @@ def SNN():
     #popRateMonitor = PopulationRateMonitor(HiddenGroup1)
     
     # Integrtion of each component in the network. 
+    if verbose: 
+        print "Integration of each component in the network."
     net = Network(collect())
-    net.add(neurons)
-    net.add(synapses)
+    for iN in range(len(neurons)): 
+        net.add(neurons[iN])
+    for iS in range(len(synapses)): 
+        net.add(synapses[iS])   
+
+    #net.add(neurons)
+    #net.add(synapses)
 
     # Save the state if LEARNING mode. 
     if mode == LEARNING:
@@ -146,7 +154,7 @@ def SNN():
         if mode == RUN:
             if verbose:
                 rospy.loginfo("Restoring previously learned SNN...")
-            net.restore(learnedFile, pathSNN+learnedFile+".dat")
+            #net.restore(learnedFile, pathSNN+learnedFile+".dat")
         
         # When the callback function has received all the input neurons, assign those neurons to the input layer. 
         frames_assignation = frames_in
@@ -209,10 +217,10 @@ def SNN():
                 rospy.loginfo("Display graphics...")
             plotVoltTemps(stateInput, 0, input_neurons)
             plotSpikeTemps(spikeMonitor)
+            plotOutputNeurons(stateOutput, 0, output_neurons)
             for k in range (0, len(synapses)):
                 plotConnectivity(synapses[k])
             #plotPopulationRate(popRateMonitor)
-            plotOutputNeurons(stateOutput, 0, output_neurons)
             #profiling_summary(show=5)            
 
     # If LEARNING mode, store the learned SNN in a file.  
@@ -220,7 +228,6 @@ def SNN():
         if verbose:
             rospy.loginfo("Saving SNN after training...")  
         net.store(learnedFile, pathSNN+learnedFile+".dat") 
-        net.restore(initFile, pathSNN+initFile+".dat")
 
 if verbose:
     rospy.loginfo("Subscribe to the callbacks (input neurons)...")

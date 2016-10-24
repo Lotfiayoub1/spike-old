@@ -3,7 +3,7 @@
     <param name="SNNname" value="AmbianceSNN"/>			    <!-- Name of the SNN -->
     <param name="verbose" type="bool" value="True"/>		<!-- Will display process if True -->	
     <param name="graph" type="bool" value="False"/>		    <!-- Display or not the graphics after first iteration  -->
-    <param name="mode" type="int" value="1"/>			    <!-- 0: Learning mode  1: run mode -->
+    <param name="mode" type="int" value="0"/>			    <!-- 0: Learning mode  1: run mode -->
     <param name="nb_learn" type="int" value="1"/>			<!-- nb data to learn (if mode==0) -->    
     <param name="input_neurons" type="int" value="100"/>	<!-- Number of input neurons -->
     <param name="output_neurons" type="int" value="1"/>		<!-- Number of output neurons -->

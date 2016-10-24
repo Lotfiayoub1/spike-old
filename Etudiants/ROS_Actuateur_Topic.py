@@ -23,126 +23,127 @@ pub_actu_reussi_avancer = rospy.Publisher('topic_actu_reussi_avancer', String, q
 
 def callback_actiondeplacement(data):
 	# On vient de recevoir quelque chose sur le topic.  On l'affiche et on le traite.
-	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
-
-	if data.data == "N":
+	print("Info recu")
+	rospy.loginfo(rospy.get_caller_id() + "I heard %s from Hamon", data.data)
+	if infoAutour != "":
+		if data.data == "N":
+			
+			#N-> obstacle
+			if infoAutour[0] == "0":
+				reponseAvancer = "F %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+				
+			#N-> pas obstacle
+			if infoAutour[0] == "1":
+				avancerDirection = "N %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+			
+			#N-> fin
+			if infoAutour[0] == "2":
+				avancerDirection = "N %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+			
+		if data.data == "E":
+			
+			#E-> obstacle
+			if infoAutour[1] == "0":
+				reponseAvancer = "F %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+				
+			#E-> pas obstacle
+			if infoAutour[1] == "1":
+				avancerDirection = "E %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+			
+			#E-> fin
+			if infoAutour[1] == "2":
+				avancerDirection = "E %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
 		
-		#N-> obstacle
-		if infoAutour[0] == "0":
-			reponseAvancer = "F %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+		if data.data == "S": 
 			
-		#N-> pas obstacle
-		if infoAutour[0] == "1":
-			avancerDirection = "N %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
+			#S-> obstacle
+			if infoAutour[2] == "0":
+				reponseAvancer = "F %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+				
+			#S-> pas obstacle
+			if infoAutour[2] == "1":
+				avancerDirection = "S %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
 			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+			#S-> fin
+			if infoAutour[2] == "2":
+				avancerDirection = "S %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
 		
-		#N-> fin
-		if infoAutour[0] == "2":
-			avancerDirection = "N %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
+		if data.data == "O":
 			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-		
-	if data.data == "E":
-		
-		#E-> obstacle
-		if infoAutour[1] == "0":
-			reponseAvancer = "F %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+			#O-> obstacle
+			if infoAutour[3] == "0":
+				reponseAvancer = "F %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+				
+			#O-> pas obstacle
+			if infoAutour[3] == "1":
+				avancerDirection = "O %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
 			
-		#E-> pas obstacle
-		if infoAutour[1] == "1":
-			avancerDirection = "E %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
-			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-		
-		#E-> fin
-		if infoAutour[1] == "2":
-			avancerDirection = "E %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
-			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-	
-	if data.data == "S": 
-		
-		#S-> obstacle
-		if infoAutour[2] == "0":
-			reponseAvancer = "F %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-			
-		#S-> pas obstacle
-		if infoAutour[2] == "1":
-			avancerDirection = "S %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
-			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-		
-		#S-> fin
-		if infoAutour[2] == "2":
-			avancerDirection = "S %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
-			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-	
-	if data.data == "O":
-		
-		#O-> obstacle
-		if infoAutour[3] == "0":
-			reponseAvancer = "F %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-			
-		#O-> pas obstacle
-		if infoAutour[3] == "1":
-			avancerDirection = "O %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
-			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
-		
-		#O-> fin
-		if infoAutour[3] == "2":
-			avancerDirection = "O %s"
-			rospy.loginfo(avancerDirection)
-			pub_actu_reussi_avancer.publish(avancerDirection)
-			
-			reponseAvancer = "T %s"
-			rospy.loginfo(reponseAvancer)
-			pub_actu_reponseactiondeplacement.publish(reponseAvancer)
+			#O-> fin
+			if infoAutour[3] == "2":
+				avancerDirection = "O %s"
+				rospy.loginfo(avancerDirection)
+				pub_actu_reussi_avancer.publish(avancerDirection)
+				
+				reponseAvancer = "T %s"
+				rospy.loginfo(reponseAvancer)
+				pub_actu_reponseactiondeplacement.publish(reponseAvancer)
 
 
 
 # On defini une fonction callback.  Elle va s'appeler a toutes les fois que le topic recoit quelque chose. 
 def callback_informationautour(data):
 	# On vient de recevoir quelque chose sur le topic.  On l'affiche et on le traite.
-	rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+	#rospy.loginfo(rospy.get_caller_id() + "I heard %s from GUI", data.data)
 
 	infoAutour = data.data;
 

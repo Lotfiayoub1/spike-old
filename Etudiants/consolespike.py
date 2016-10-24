@@ -13,6 +13,7 @@ rospy.init_node('console', anonymous=True)
 def callBackPosition(data):
     #print "callBackPosition: " + data.data
     tableau = np.matrix(data) 
+    print tableau
 
 def callbackTableau(data):
     #print "callBackTableau: " + data.data

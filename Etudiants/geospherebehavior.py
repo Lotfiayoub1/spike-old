@@ -18,7 +18,7 @@ print('Geosphere prete...')
 if __name__ == "__main__":
     
     geosphere = [
-        ["M", "R", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M"], 
+        ["M", "D", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M"], 
         ["M", "S", "S", "S", "S", "S", "S", "S", "S", "S", "M", "S", "S", "S", "M"],
         ["M", "M", "M", "M", "S", "M", "M", "M", "M", "M", "M", "S", "M", "S", "M"], 
         ["M", "S", "S", "M", "S", "M", "S", "S", "S", "S", "S", "S", "M", "S", "M"],
@@ -66,9 +66,10 @@ if __name__ == "__main__":
             chaineRetour += "O"
         
         chaineRetour += str(rospy.get_time())
-        rospy.loginfo(chaineRetour)
+        rospy.loginfo("La chaine que jenvoie a Guillaume :" + chaineRetour)
 	# Publication de la chaine sur le topic. 
 	pub_geosphere_gettoutautour.publish(chaineRetour)
+	
             
     def bougerPointeur(direction):
         if direction == "N":
@@ -82,9 +83,11 @@ if __name__ == "__main__":
             
     def sendStringMap ():
         stringmap=""
-        for list in geosphere:
+	tableau = geosphere
+	tableau[x][y] = "R"
+        for list in tableau:
             for letter in list:
-                stringmap += letter
+		stringmap += letter
             stringmap += ";"
 
         stringmap += str(rospy.get_time())

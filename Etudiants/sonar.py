@@ -28,13 +28,13 @@ def obstacleDevant(objetDevant):
                 surrounding += "0"
             else:
                 surrounding += "1"
-    print(surrounding)
+    return surrounding
 
 # On defini une fonction callback.  Elle va s'appeler a toutes les fois que le topic recoit quelque chose. 
 def callback(data):
     obstaclesAutour = obstacleDevant(data.data)
     # Affiche la chaine a la console (debuggage) 
-    rospy.loginfo(obstaclesAutour)
+    rospy.loginfo("Jecris " + obstaclesAutour + " a EZIC")
     # Publication de la chaine sur le topic. 
     pub.publish(obstaclesAutour)
 
