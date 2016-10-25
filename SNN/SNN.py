@@ -25,10 +25,10 @@ SNNname = rospy.get_param("/SNN/SNNname")
 verbose = rospy.get_param("/SNN/verbose")  
 mode = rospy.get_param("/SNN/mode")
 nb_learn = rospy.get_param("/SNN/nb_learn")
-input_neurons = rospy.get_param("/SNN/input_neurons")
-output_neurons = rospy.get_param("/SNN/output_neurons")
-hidden_neurons = rospy.get_param("/SNN/hidden_neurons")
-hidden_layers = rospy.get_param("/SNN/hidden_layers")
+sensory_neurons = rospy.get_param("/SNN/sensory_neurons")
+motor_neurons = rospy.get_param("/SNN/motor_neurons")
+inter_neurons = rospy.get_param("/SNN/inter_neurons")
+inter_layers = rospy.get_param("/SNN/inter_layers")
 synapse_weight = str(rospy.get_param("/SNN/synapse_weight"))
 tau = rospy.get_param("/SNN/tau") * ms
 threshold_value = rospy.get_param("/SNN/threshold")
@@ -46,10 +46,10 @@ rospy.loginfo("verbose:" + str(verbose))
 rospy.loginfo("mode:" + str(mode))
 rospy.loginfo("nb_learn:" + str(nb_learn))
 rospy.loginfo("graph:" + str(graph))
-rospy.loginfo("input_neurons:" + str(input_neurons))
-rospy.loginfo("output_neurons:" + str(output_neurons))
-rospy.loginfo("hidden_neurons:" + str(hidden_neurons))
-rospy.loginfo("hidden_layers:" + str(hidden_layers))
+rospy.loginfo("sensory_neurons:" + str(sensory_neurons))
+rospy.loginfo("motor_neurons:" + str(motor_neurons))
+rospy.loginfo("inter_neurons:" + str(inter_neurons))
+rospy.loginfo("inter_layers:" + str(inter_layers))
 rospy.loginfo("synapse_weight" + synapse_weight)
 rospy.loginfo("tau:" + str(tau))
 rospy.loginfo("threshold:" + str(threshold_value))
@@ -91,51 +91,50 @@ def SNN():
     # SNN Creation    
     neurons = []                # Array of neuronGroup
     synapses = []               # Array of synapses
-    INPUT_LAYER = 0             # input layer index
-    OUTPUT_LAYER = hidden_layers + 2 - 1    # Output layer index:  Hidden layer +  1 input layer + 1 output layer (- 1 because the index starts at 0).
+    SENSORY_LAYER = 0             # input layer index
+    MOTOR_LAYER = inter_layers + 2 - 1    # Output layer index:  Hidden layer +  1 input layer + 1 output layer (- 1 because the index starts at 0).
     #postsynaptic = "v_post += " + synapse_weight    # Synapse weight
     postsynaptic = "v += " + synapse_weight    # Synapse weight
     
     # Creation of the neurons and synapses structures
-    for layer in range(INPUT_LAYER,OUTPUT_LAYER+1): 
+    for layer in range(SENSORY_LAYER,MOTOR_LAYER+1): 
         # Neurons
-        if layer == INPUT_LAYER:
-            neurons.append(NeuronGroup(input_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
+        if layer == SENSORY_LAYER:
+            neurons.append(NeuronGroup(sensory_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
             if verbose: 
-                print "Assigning INPUT layer: " + str(layer)
-        if layer == OUTPUT_LAYER: 
-            neurons.append(NeuronGroup(output_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
+                print "Assigning SENSORY layer: " + str(layer)
+        if layer == MOTOR_LAYER: 
+            neurons.append(NeuronGroup(motor_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
             if verbose: 
-                print "Assigning OUTPUT layer: " + str(layer)
-        if layer < OUTPUT_LAYER and layer > INPUT_LAYER:
-            neurons.append(NeuronGroup(hidden_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
+                print "Assigning MOTOR layer: " + str(layer)
+        if layer < MOTOR_LAYER and layer > SENSORY_LAYER:
+            neurons.append(NeuronGroup(inter_neurons, equation, threshold=threshold_value, reset=reset_value, refractory=refractory_value))
             if verbose: 
-                print "Assigning HIDDEN layer: " + str(layer)
+                print "Assigning INTER layer: " + str(layer)
         # Synapses
-        if layer > INPUT_LAYER:
+        if layer > SENSORY_LAYER:
             synapses.append(Synapses(neurons[layer-1], neurons[layer], on_pre=postsynaptic))          
             synapses[layer-1].connect() 
             if verbose: 
                 print "Assigning SYNAPSES between layer: " + str(layer-1) + " and layer " + str(layer)
     
     # Creation of the monitors
-    stateInput = StateMonitor(neurons[INPUT_LAYER], 'v', record=True)
-    stateOutput = StateMonitor(neurons[OUTPUT_LAYER], 'v', record=True)
-    spikeMonitor = SpikeMonitor(neurons[OUTPUT_LAYER])
-    #popRateMonitor = PopulationRateMonitor(HiddenGroup1)
+    stateSensory = StateMonitor(neurons[SENSORY_LAYER], 'v', record=True)
+    stateMotor = StateMonitor(neurons[MOTOR_LAYER], 'v', record=True)
+    spikeMonitor = SpikeMonitor(neurons[MOTOR_LAYER])
     
     # Integrtion of each component in the network. 
     if verbose: 
         print "Integration of each component in the network."
     net = Network(collect())
-    for iN in range(len(neurons)): 
-        net.add(neurons[iN])
-    for iS in range(len(synapses)): 
-        net.add(synapses[iS])   
+    net.add(neurons)
+    net.add(synapses)
 
-    #net.add(neurons)
-    #net.add(synapses)
-
+    #for iN in range(len(neurons)): 
+    #    net.add(neurons[iN])
+    #for iS in range(len(synapses)): 
+    #    net.add(synapses[iS])   
+    
     # Save the state if LEARNING mode. 
     if mode == LEARNING:
         if verbose:
@@ -154,22 +153,21 @@ def SNN():
         if mode == RUN:
             if verbose:
                 rospy.loginfo("Restoring previously learned SNN...")
-            #net.restore(learnedFile, pathSNN+learnedFile+".dat")
+            net.restore(learnedFile, pathSNN+learnedFile+".dat")
         
         # When the callback function has received all the input neurons, assign those neurons to the input layer. 
         frames_assignation = frames_in
         #print len(frames_assignation)
         #print input_neurons
-        if len(frames_assignation) >= input_neurons:    
+        if len(frames_assignation) >= sensory_neurons:    
             if verbose:
-                rospy.loginfo("Assigning input neurons...")
+                rospy.loginfo("Assigning sensory neurons...")
             
-            for i in range(0,input_neurons): 
-                neurons[INPUT_LAYER].v[i] = frames_assignation[i] 
+            for i in range(0,sensory_neurons): 
+                neurons[SENSORY_LAYER].v[i] = frames_assignation[i] 
                 if verbose:
                     rospy.loginfo("neuron : " + str(i) + " voltage: " + str(neurons[INPUT_LAYER].v[i]))  
 
-            
             # Simulation execution
             if verbose:
                 rospy.loginfo("Simulation execution...")   
@@ -195,12 +193,12 @@ def SNN():
                 pickleOutput_v = open(pathSNN+learnedFile+"_v.pk1", 'wb')
                 pickleOutput_t = open(pathSNN+learnedFile+"_t.pk1", 'wb')
                 # Send the voltage and time of the output state monitor. (contains spikes)
-                pickle.dump(stateOutput.v, pickleOutput_v)
-                pickle.dump(stateOutput.t/ms, pickleOutput_t)
+                pickle.dump(stateMotor.v, pickleOutput_v)
+                pickle.dump(stateMotor.t/ms, pickleOutput_t)
                 pickleOutput_v.close()
                 pickleOutput_t.close()
                 # Display some basic information to the console. 
-                displaySpikeMonitorInfo(spikeMonitor)
+            displaySpikeMonitorInfo(spikeMonitor)
 
         # If we asked for a graph, then exit afterward. 
         if graph == True:
@@ -215,9 +213,9 @@ def SNN():
         if graph == True:
             if verbose:
                 rospy.loginfo("Display graphics...")
-            plotVoltTemps(stateInput, 0, input_neurons)
+            plotVoltTemps(stateSensory, 0, sensory_neurons)
             plotSpikeTemps(spikeMonitor)
-            plotOutputNeurons(stateOutput, 0, output_neurons)
+            plotOutputNeurons(stateMotor, 0, motor_neurons)
             for k in range (0, len(synapses)):
                 plotConnectivity(synapses[k])
             #plotPopulationRate(popRateMonitor)
