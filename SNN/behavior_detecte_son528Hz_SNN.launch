@@ -10,7 +10,7 @@
     <param name="hidden_neurons" type="int" value="1"/>	<!-- Number of hidden neurons -->
     <param name="hidden_layers" type="int" value="1"/>	    <!-- Number of layers of hidden neurons -->
     <param name="synapse_weight" value="0.2"/>	            <!-- Synapse weight value -->
-    <param name="tau" type="int" value="10"/>			    <!-- Tau constant -->
+    <param name="tau" type="int" value="30"/>			    <!-- Tau constant -->
     <param name="threshold" value="v>0.8"/>			        <!-- The spike threshold  -->
     <param name="reset" value="v = 0"/>			            <!-- The reset value after a spike  -->
     <param name="refractory" type="int" value="5"/>		    <!-- The refractory time -->

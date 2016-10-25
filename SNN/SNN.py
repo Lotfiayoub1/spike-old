@@ -154,12 +154,10 @@ def SNN():
         if mode == RUN:
             if verbose:
                 rospy.loginfo("Restoring previously learned SNN...")
-            #net.restore(learnedFile, pathSNN+learnedFile+".dat")
+            net.restore(learnedFile, pathSNN+learnedFile+".dat")
         
         # When the callback function has received all the input neurons, assign those neurons to the input layer. 
         frames_assignation = frames_in
-        #print len(frames_assignation)
-        #print input_neurons
         if len(frames_assignation) >= input_neurons:    
             if verbose:
                 rospy.loginfo("Assigning input neurons...")
@@ -175,7 +173,7 @@ def SNN():
                 rospy.loginfo("Simulation execution...")   
         
             if verbose:
-                net.run(simulation_lenght, report='text', report_period=1*second)
+                net.run(simulation_lenght, report='text', report_period=0.2*second)
             else:
                 net.run(simulation_lenght)
             del frames_in[:] 
@@ -200,7 +198,8 @@ def SNN():
                 pickleOutput_v.close()
                 pickleOutput_t.close()
                 # Display some basic information to the console. 
-                displaySpikeMonitorInfo(spikeMonitor)
+                
+            displaySpikeMonitorInfo(spikeMonitor)
 
         # If we asked for a graph, then exit afterward. 
         if graph == True:
