@@ -93,8 +93,7 @@ def SNN():
     synapses = []               # Array of synapses
     SENSORY_LAYER = 0             # input layer index
     MOTOR_LAYER = inter_layers + 2 - 1    # Output layer index:  Hidden layer +  1 input layer + 1 output layer (- 1 because the index starts at 0).
-    #postsynaptic = "v_post += " + synapse_weight    # Synapse weight
-    postsynaptic = "v += " + synapse_weight    # Synapse weight
+    postsynaptic = "v_post += " + synapse_weight    # Synapse weight
     
     # Creation of the neurons and synapses structures
     for layer in range(SENSORY_LAYER,MOTOR_LAYER+1): 
@@ -113,13 +112,16 @@ def SNN():
                 print "Assigning INTER layer: " + str(layer)
         # Synapses
         if layer > SENSORY_LAYER:
-            synapses.append(Synapses(neurons[layer-1], neurons[layer], on_pre=postsynaptic))          
+            synapses.append(Synapses(neurons[layer-1], neurons[layer],  on_pre=postsynaptic))  
+            #synapses.append(Synapses(neurons[layer-1], neurons[layer], 'w : 1', on_pre='v_post += w' ))          
             synapses[layer-1].connect() 
             if verbose: 
                 print "Assigning SYNAPSES between layer: " + str(layer-1) + " and layer " + str(layer)
     
     # Creation of the monitors
     stateSensory = StateMonitor(neurons[SENSORY_LAYER], 'v', record=True)
+    if inter_neurons > 0:
+        stateInter = StateMonitor(neurons[SENSORY_LAYER + 1], 'v', record=True)
     stateMotor = StateMonitor(neurons[MOTOR_LAYER], 'v', record=True)
     spikeMonitor = SpikeMonitor(neurons[MOTOR_LAYER])
     
@@ -153,24 +155,23 @@ def SNN():
         if mode == RUN:
             if verbose:
                 rospy.loginfo("Restoring previously learned SNN...")
-            net.restore(learnedFile, pathSNN+learnedFile+".dat")
+            #net.restore(learnedFile, pathSNN+learnedFile+".dat")
         
         # When the callback function has received all the input neurons, assign those neurons to the input layer. 
         frames_assignation = frames_in
-<<<<<<< HEAD
-        if len(frames_assignation) >= input_neurons:    
-=======
-        #print len(frames_assignation)
-        #print input_neurons
+
         if len(frames_assignation) >= sensory_neurons:    
->>>>>>> 7f02518bc87e22f1724a651133c7086c9f1351ed
             if verbose:
                 rospy.loginfo("Assigning sensory neurons...")
             
             for i in range(0,sensory_neurons): 
-                neurons[SENSORY_LAYER].v[i] = frames_assignation[i] 
+                neurons[SENSORY_LAYER].v[i] = frames_assignation[i]  # Only v of the first simulation
+                #neurons[SENSORY_LAYER].v = frames_assignation[i]    # All v's of the simulation
+                #synapses[i].w[j] = frames_assignation[i]
+                #neurons[SENSORY_LAYER].I[i] = frames_assignation[i] 
                 if verbose:
-                    rospy.loginfo("neuron : " + str(i) + " voltage: " + str(neurons[INPUT_LAYER].v[i]))  
+                    #rospy.loginfo("synapse layer: " + str(i) + " neuron: " + str(j) + " poid synpatique: " + str(synapses[i].w[j])) 
+                    rospy.loginfo("neuron : " + str(i) + " voltage: " + str(neurons[SENSORY_LAYER].v))  
 
             # Simulation execution
             if verbose:
@@ -202,10 +203,7 @@ def SNN():
                 pickleOutput_v.close()
                 pickleOutput_t.close()
                 # Display some basic information to the console. 
-<<<<<<< HEAD
-                
-=======
->>>>>>> 7f02518bc87e22f1724a651133c7086c9f1351ed
+
             displaySpikeMonitorInfo(spikeMonitor)
 
         # If we asked for a graph, then exit afterward. 
@@ -221,9 +219,11 @@ def SNN():
         if graph == True:
             if verbose:
                 rospy.loginfo("Display graphics...")
-            plotVoltTemps(stateSensory, 0, sensory_neurons)
+            plotVoltTemps(stateSensory, "Difference de potentiel des neurones SENSORIELLES fonction du temps", 0, sensory_neurons)
+            if inter_neurons > 0:
+                plotVoltTemps(stateInter, "Difference de potentiel des INTER neurones fonction du temps",0, inter_neurons)
+            plotVoltTemps(stateMotor, "Difference de potentiel des neurones MOTEUR fonction du temps",0, motor_neurons)
             plotSpikeTemps(spikeMonitor)
-            plotOutputNeurons(stateMotor, 0, motor_neurons)
             for k in range (0, len(synapses)):
                 plotConnectivity(synapses[k])
             #plotPopulationRate(popRateMonitor)

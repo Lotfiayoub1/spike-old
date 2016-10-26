@@ -1,0 +1,8 @@
+rosbag record /topic_in_SNN_AmbianceSNN -O silence1.bag
+
+CTRL-C pour quitter
+
+
+rosbag play silence1.bag
+
+

@@ -18,8 +18,8 @@ def displaySpikeMonitorInfo(spikeMonitor):
     #for j in range(0,nb):
     #    print "spike: " + str(j) + " " + str(spikeMonitor.count[j])
 
-def plotVoltTemps(statemon, debut, fin):
-    title("Difference de potentiel des neurones ENTREES fonction du temps (Neurones de " + str(debut) + " a " + str(fin) + ")")
+def plotVoltTemps(statemon, titre, debut, fin):
+    title(titre + " (Neurones de " + str(debut) + " a " + str(fin) + ")")
     for j in range(debut,fin):
         plt.plot(statemon.t/ms, statemon.v[j])
     plt.ylabel('voltage')
