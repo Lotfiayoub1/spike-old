@@ -4,48 +4,26 @@ import numpy as np
 from brian2 import *
 import matplotlib.pyplot as plt
       
-# Recuperation des neurones de sorties
-# spikeMonitor.num_spikes: Total des spikes
-# spikeMonitor.count: Total des spikes / par neurones
-# spikeMonitor.count: Total des spikes / pour neurones i
-# spikeMonitor.i: Tableau des spikes enregistres
-
-def displaySpikeMonitorInfo(spikeMonitor):
-    print "Information sur les spikes en SORTIE"
-    print "Nombre total de spikes------------------: " + str(spikeMonitor.num_spikes)
-    #nb = len(spikeMonitor.count)
-    #print "Total des spikes par neurones: " + str(nb)
-    #for j in range(0,nb):
-    #    print "spike: " + str(j) + " " + str(spikeMonitor.count[j])
 
 def plotVoltTemps(statemon, titre, debut, fin):
-    title(titre + " (Neurones de " + str(debut) + " a " + str(fin) + ")")
+    title(titre + " (Neurons from " + str(debut) + " to " + str(fin) + ")")
     for j in range(debut,fin):
         plt.plot(statemon.t/ms, statemon.v[j])
-    plt.ylabel('voltage')
+    plt.ylabel('Voltage mV')
     plt.xlabel('Temps m/s')
     plt.show()
     
-def plotOutputNeurons(stateOutput, debut, fin):
-    title("Difference de potentiel final des neurones de SORTIE")
-    for j in range(debut,fin):
-        plt.plot(stateOutput.t/ms, stateOutput.v[j])
-    plt.ylabel('voltage')
-    plt.xlabel('Temps en ms')
-    plt.show()
-    
-
-def plotSpikeTemps(spikemon):
-    title("Decharges des neurones de SORTIE en fonction du temps")
+def plotSpikeTemps(spikemon, titre):
+    title(titre)
     plt.plot(spikemon.t/ms, spikemon.i, '.k')
     plt.ylabel('Spikes')
-    plt.xlabel('Temps m/s')
+    plt.xlabel('Time m/s')
     plt.show()
     
 def plotPopulationRate(popratemon):
-    title("Population Rate des spikes")
+    title("Spikes Population Rate")
     plt.plot(popratemon.t/ms, popratemon.rate/Hz)
-    plt.xlabel('Temps m/s')
+    plt.xlabel('Time m/s')
     plt.ylabel('Rate/Hz')
     plt.show()
 
@@ -62,6 +40,6 @@ def plotConnectivity(S):
     ylabel("Neuron index")
     xlim(-0.1, 1.1)
     ylim(-1, max(Ns, Nt))
-    title("Connectivite des couches de neurones et synapses")
+    title("SNN Architecture Connectivity")
     plt.show()
 

@@ -7,12 +7,12 @@ rospy.init_node('actuateur', anonymous=True)
 
 
 
-infoAutour = "";
+infoAutour = ""
 
 def varGlobalSet():
-	global infoAutour;
+	global infoAutour
 
-varGlobalSet();
+varGlobalSet()
 	
 # Declaration du topic "chatter".  On va publier des string.  Max de 10 dans la queue.  Les plus anciennes s'eliminent.
 
@@ -144,13 +144,11 @@ def callback_actiondeplacement(data):
 def callback_informationautour(data):
 	# On vient de recevoir quelque chose sur le topic.  On l'affiche et on le traite.
 	#rospy.loginfo(rospy.get_caller_id() + "I heard %s from GUI", data.data)
+	infoAutour = data.data
 
-	infoAutour = data.data;
-
-
+print "Subscribe..."
 rospy.Subscriber('topic_ia_actiondeplacement', String, callback_actiondeplacement)
 rospy.Subscriber('pub_sonar_informationautour', String, callback_informationautour)
-
 print("Actuateurs prets")
 
 # On boucle a l'infini.  Seul le callback sera appele sur reception d'un message. 

@@ -41,6 +41,19 @@
 </category>
 
 <category>
+<pattern>DEMANDE_SILENCE</pattern>
+<template>
+<random>
+<li>Please!</li>
+<li>Stay calm, please.</li>
+<li>Keep quiet, please.</li>
+<li>Would you plase keep quiet.</li>
+<li>You have to work in silence.</li>
+</random>
+</template>
+</category>
+
+<category>
 <pattern>MY NAME IS *</pattern>
 <template>
 <random>

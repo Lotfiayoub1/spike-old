@@ -21,17 +21,21 @@ echo "behavior_parle"
 xterm -e "rosrun spike behavior_parle.py" &
 #echo "freenect"
 #xterm -e "roslaunch freenect_launch freenect.launch" &
-echo "behavior_ecoute et pocketSphinx"
-xterm -e "roslaunch pocketsphinx behavior_ecoute.launch" &
-echo "behavior_joue_son"
-xterm -e "rosrun spike behavior_joue_son.py" &
+#echo "behavior_ecoute et pocketSphinx"
+#xterm -e "roslaunch pocketsphinx behavior_ecoute.launch" &
+#echo "behavior_joue_son"
+#xterm -e "rosrun spike behavior_joue_son.py" &
 #echo "behavior_deplacement"
 #xterm -e "rosrun spike behavior_deplacement.py" &
+#echo "behavior_saisie_son_ambiant"
+#xterm -e "rosrun spike behavior_saisie_son_ambiant.py" &
 echo "behavior_idle"
 xterm -e "rosrun spike behavior_idle.py" &
+echo "behavior_detecte_ambiance_classe_snn"
+xterm -e "roslaunch spike behavior_detecte_ambiance_classe_SNN.launch" &
 echo "behavior_attention"
 xterm -e "rosrun spike behavior_attention.py" &
-#export DISPLAY=':0'
+export DISPLAY=':0'
 echo "behavior_humeur"
 xterm -e "rosrun spike behavior_humeur.py" &
 

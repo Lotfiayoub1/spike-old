@@ -105,6 +105,16 @@ def callbackAssigneTexteEcoute(data):
 	if verbose:
 		rospy.loginfo(rospy.get_caller_id() + "Recu: %s", rospy.get_param("texte_recu"))
 	
+def callbackAmbiance(data):
+    #  ATTENTION!  Il faudra refaire cette partie pour la faire gerer par l'attention.  
+    if verbose:
+        rospy.loginfo(rospy.get_caller_id() + "Recu du SNN: %s", data.data)
+    nbSpikes = int(data.data)
+    if nbSpikes > 0:
+        humeurStr = "Triste"
+        topic_humeur.publish(humeurStr)
+        topic_attention_conversation.publish("DEMANDE_SILENCE") 
+
 
 if verbose:
 	rospy.loginfo("Initialisation des topics")
@@ -125,6 +135,9 @@ topic_idle = rospy.Publisher('topic_idle', String, queue_size=10)
 topic_attention_conversation = rospy.Publisher('topic_attention_conversation', String, queue_size=10)
 # Enregistrement du callback de behavior_ecoute (pocketsphinx)
 rospy.Subscriber("behavior_ecoute/output", String, callbackAssigneTexteEcoute)
+
+# Enregistrement du callback d'ecoute du son ambient (par SNN)
+rospy.Subscriber("topic_out_SNN_Ambiance", String, callbackAmbiance)
 
 # Chargement du fichier .fcl - Fuzzy Control Language qui contient la logique floue 
 if verbose:

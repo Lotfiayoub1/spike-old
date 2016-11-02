@@ -12,13 +12,13 @@ directionDerniereDemande = "N"
 # On defini une fonction callback.  Elle va s'appeler a toutes les fois que le topic recoit quelque chose.
 def callback_reponseactiondeplacement(data):
     # On vient de recevoir quelque chose sur le topic.  On l'affiche et on le traite.
-	peutSeDeplacer = data.data
-	miseAJour = True
+    peutSeDeplacer = data.data
+    miseAJour = True
 
 def callback_position(data):
     # On vient de recevoir quelque chose sur le topic.  On l'affiche et on le traite.
-	position = data.data
-	miseAJour = True
+    position = data.data
+    miseAJour = True
 
 def set_global_maj():
     global position
@@ -46,11 +46,11 @@ rospy.Subscriber("topic_actu_reponseactiondeplacement", String, callback_reponse
 while True:
     #S il  y a une mise a jour des informations.
     if miseAJour:
-	print("Mise a jour...")
+        print("Mise a jour...")
         miseAJour = False
 
         # Ici on fait notre intelligence
-	print(peutSeDeplacer)
+        print(peutSeDeplacer)
         if peutSeDeplacer == "T":
             if directionDerniereDemande == "N":
                 pub_ia_ecrireconsole.Publish("Le robot s'est deplace au Nord")
@@ -64,22 +64,22 @@ while True:
                 pub_ia_ecrireconsole.Publish("Une erreur s'est produite")
         else:
             random = random.randint(1,4)
-	    print(random)
+            print(random)
 
             if random == 1:
-		print("On demande aux actuateurs d aller au Nord")
+                print("On demande aux actuateurs d aller au Nord")
                 pub_ia_actiondeplacement.publish("N")
                 directionDerniereDemande = "N"
             elif random == 2:
-		print("On demande aux actuateurs d aller a l Est")
+                print("On demande aux actuateurs d aller a l Est")
                 pub_ia_actiondeplacement.publish("E")
                 directionDerniereDemande = "E"
             elif random == 3:
-		print("On demande aux actuateurs d aller au Sud")
+                print("On demande aux actuateurs d aller au Sud")
                 pub_ia_actiondeplacement.publish("S")
                 directionDerniereDemande = "S"
             elif random == 4:
-		print("On demande aux actuateurs d aller a l Ouest")
+                print("On demande aux actuateurs d aller a l Ouest")
                 pub_ia_actiondeplacement.publish("O")
                 directionDerniereDemande = "O"
             else:

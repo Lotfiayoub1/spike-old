@@ -281,9 +281,8 @@ if __name__ == "__main__":
 
             # On s'inscrit aux topics
             rospy.Subscriber("topic_humeur", String, callbackHumeur)
-            #rospy.Subscriber("topic_out_SNN_AmbianceSNN", String, callbackPensee)
             rospy.Subscriber("behavior_ecoute/output", String, callbackStatut)
-
+            
 
         if verbose == True:
             rospy.loginfo("Appel de la definition de l'expression faciale.")

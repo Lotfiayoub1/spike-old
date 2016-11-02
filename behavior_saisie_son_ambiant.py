@@ -39,7 +39,7 @@ rospy.init_node('node_saisie_son_ambiant', anonymous=True)
 rospy.loginfo("Behavior_saisie_son_ambiant")
 
 if mode == ROS or mode == ROSBAG:
-    topic_son_ambiant = rospy.Publisher('topic_in_SNN_Son528Hz', String, queue_size=100)
+    topic_son_ambiant = rospy.Publisher('topic_in_SNN_Ambiance', String, queue_size=100)
 
 frames = []
 
@@ -79,6 +79,7 @@ def cycleRecording():
                 normalized = 1.0
             if normalized < 0.0:
                 normalized = 0.0
+            #normalized = 1 - normlalized
             #normalized = normalized * 1.5
             #print str(i) + " decoded: " + str(float(moyenne)) + " normalized: " + str(float(normalized))
             if normalized != 0.0:
