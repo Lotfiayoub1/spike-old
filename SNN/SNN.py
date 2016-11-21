@@ -36,7 +36,6 @@ threshold_value = rospy.get_param("/SNN/threshold")
 refractory_value = rospy.get_param("/SNN/refractory") * ms
 reset_value = rospy.get_param("/SNN/reset")
 simulation_lenght = rospy.get_param("/SNN/simulation_lenght") * ms
-leak = rospy.get_param("/SNN/leak")
 graph = rospy.get_param("/SNN/graph")
 pathSNN = rospy.get_param("/SNN/path")
  
@@ -57,7 +56,6 @@ rospy.loginfo("tau:" + str(tau))
 rospy.loginfo("threshold:" + str(threshold_value))
 rospy.loginfo("refractory:" + str(refractory_value))
 rospy.loginfo("simulation_lenght:" + str(simulation_lenght))
-rospy.loginfo("leak:" + str(leak))
 rospy.loginfo("path:" + pathSNN)
 
 # Filenames and path where the trained SNN and pickle files will be saved. 
@@ -104,7 +102,6 @@ def SNN():
     MOTOR_LAYER = inter_layers + 2 - 1    # Output layer index:  Hidden layer +  1 input layer + 1 output layer (- 1 because the index starts at 0).
            
     # Creation of the equation
-    #equation = "dv/dt = (1 - v - " + str(leak) + ")/tau : 1 (unless refractory)"
     # LI&F equation p.110 Brian2.pdf
     equation = '''
     dv/dt = (v0 - v)/tau : 1 (unless refractory)
