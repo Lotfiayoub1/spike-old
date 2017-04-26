@@ -44,14 +44,6 @@ if verbose:
 if mode == modeClavier:
 	presentation = False
 	while True:
-		if presentation == False:
-			k.respond("SPIKE LOAD VARIABLE ENVIRONNEMENT")
-			reponse= k.respond("SPIKE PRESENTATION1")
-			print "Spike> " + reponse
-			presentation = True
-			entree = raw_input("Vous> ")
-			reponse = k.respond("SPIKE PRESENTATION2 " + entree)
-			print "Spike> " + reponse
 		entree = raw_input("Vous> ")
 		reponse = k.respond(entree)
 		if len(reponse) == 0:
@@ -88,8 +80,6 @@ if mode == modeVocal:
 	topic_parle = rospy.Publisher('topic_parle', String, queue_size=10)
 	# On publie a behavior_idle
 	topic_idle_aiml_template = rospy.Publisher('topic_idle_aiml_template', String, queue_size=10)
-
-
 
 	if verbose:
 		rospy.loginfo("En attente des topics...")	

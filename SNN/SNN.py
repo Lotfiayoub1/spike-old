@@ -103,9 +103,14 @@ def SNN():
            
     # Creation of the equation
     # LI&F equation p.110 Brian2.pdf
+    #equation = '''
+    #dv/dt = (v0 - v)/tau : 1 (unless refractory)
+    #v0 : 1'''
+
     equation = '''
-    dv/dt = (v0 - v)/tau : 1 (unless refractory)
-    v0 : 1'''
+    dv/dt = (1 - v)/tau : 1 (unless refractory)
+    '''
+
 
     if verbose: 
         rospy.loginfo("Equation: " + equation)

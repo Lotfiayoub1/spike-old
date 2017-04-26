@@ -1,0 +1,147 @@
+FUNCTION_BLOCK attention
+ 
+    VAR_INPUT	
+		Senseur_Deplacement:		REAL; (* RANGE(0 .. 10) *)
+		Senseur_Vision : 	    	REAL; (* RANGE(0 .. 10) *)
+        Senseur_Ecoute:    			REAL; (* RANGE(0 .. 10) *)
+		Senseur_LRF: 				REAL; (* RANGE(0 .. 10) *)
+		Senseur_Batterie:			REAL; (* RANGE(0 .. 10) *)
+		TempsDepuisDerniereAction: 	REAL; (* Un nombre de secondes *)	
+    END_VAR
+ 
+    VAR_OUTPUT
+        Attention_PileVide:		REAL; (* RANGE(0 .. 10) *)
+        Attention_Conversation:	REAL; (* RANGE(0 .. 10) *)
+        Attention_Idle:			REAL; (* RANGE(0 .. 10) *)
+        Attention_Deplacement:	REAL; (* RANGE(0 .. 10) *)
+	Humeur:  					REAL; (* RANGE(0 .. 10) *)
+	Energie: 					REAL; (* RANGE(0 .. 10) *)
+    END_VAR
+ 
+    FUZZIFY Senseur_Deplacement
+        TERM Arret := (0, 10) (1, 0) ;
+        TERM Lent := (0, 10) (1, 10) (6, 0) ;
+        TERM Rapide := (5, 0) (10, 10) ;
+    END_FUZZIFY
+ 
+    FUZZIFY Senseur_Vision
+        TERM AucunMouvement := (0, 10) (1, 0) ;
+        TERM Calme := (0, 10) (1, 10) (6, 0) ;
+        TERM Mouvemente := (5, 0) (10, 10) ;
+    END_FUZZIFY
+
+    FUZZIFY Senseur_Ecoute
+        TERM Silence := (0, 10) (1, 0) ;
+        TERM Calme := (0, 10) (1, 10) (6, 0) ;
+        TERM Bruyant := (5, 0) (10, 10) ;
+    END_FUZZIFY
+
+    FUZZIFY Senseur_LRF
+        TERM CollisionImminente := (0, 10) (1, 10) (2, 0) ;
+        TERM Pres := (0, 10) (5, 0)  ;
+        TERM Loin := (4, 0) (9, 10) (10, 10) ;
+    END_FUZZIFY
+
+    FUZZIFY Senseur_Batterie
+        TERM Vide := (0, 10) (1, 0) ;
+        TERM Faible := (0, 10) (5, 0);
+        TERM Moyenne := (0, 0) (5, 10) (10, 0) ;
+        TERM Pleine := (5, 0) (10, 10) ;
+    END_FUZZIFY
+
+   FUZZIFY TempsDepuisDerniereAction 
+        TERM Court := (0, 10) (10, 0) ;
+        TERM Moyen := (5, 0) (10, 10) (15, 0) ;
+        TERM Long := (10, 0) (15, 10) ;
+    END_FUZZIFY
+ 
+    DEFUZZIFY Attention_PileVide
+        TERM Behavior_NoOp := 0.0 ;
+        TERM Behavior_PileVide := 10.0 ;
+        ACCU:MAX;
+        METHOD: COGS;(*MoM;*)
+        DEFAULT := 0.0; 
+    END_DEFUZZIFY
+
+    DEFUZZIFY Attention_Conversation
+        TERM Behavior_NoOp := 0.0 ;
+        TERM Behavior_Conversation := 10.0 ;
+        ACCU:MAX;
+        METHOD: COGS;(*MoM;*)
+        DEFAULT := 0.0; 
+    END_DEFUZZIFY
+
+    DEFUZZIFY Attention_Deplacement
+        TERM Behavior_NoOp := 0.0 ;
+        TERM Behavior_Deplacement := 10.0 ;
+        ACCU:MAX;
+        METHOD: COGS;(*MoM;*)
+        DEFAULT := 0.0; 
+    END_DEFUZZIFY
+
+    DEFUZZIFY Attention_Idle
+        TERM Behavior_NoOp := 0.0 ;
+        TERM Behavior_Idle := 10.0 ;
+        ACCU:MAX;
+        METHOD: COGS;(*MoM;*)
+        DEFAULT := 0.0; 
+    END_DEFUZZIFY
+
+    DEFUZZIFY Humeur
+        TERM Joyeux := 0.0;
+        TERM Neutre := 5.0 ;
+        TERM Triste := 10.0 ;
+        ACCU:MAX;
+        METHOD: COGS;(*MoM;*)
+        DEFAULT := 5.0; 
+    END_DEFUZZIFY
+ 
+    DEFUZZIFY Energie
+        TERM Basse := 0.0 ;
+        TERM Neutre := 10.0 ;
+        ACCU:MAX;
+        METHOD: COGS;(*MoM;*)
+        DEFAULT := 10.0; 
+    END_DEFUZZIFY
+
+    RULEBLOCK Attention_PileVide
+        AND:MIN;
+        (*ACCU:MAX;*)
+	RULE 1: IF (Senseur_Batterie IS Vide) THEN (Attention_PileVide IS Behavior_PileVide);
+    END_RULEBLOCK
+
+    RULEBLOCK Attention_Conversation
+        AND:MIN;
+        (*ACCU:MAX;*)
+	RULE 1: IF (Senseur_Deplacement IS Arret) AND (Senseur_Ecoute IS Bruyant) THEN (Attention_Conversation IS Behavior_Conversation);
+    END_RULEBLOCK
+
+    RULEBLOCK Attention_Idle
+        AND:MIN;
+        (*ACCU:MAX;*)
+	RULE 1: IF (Senseur_Deplacement IS Arret) AND (TempsDepuisDerniereAction IS Long) THEN (Attention_Idle IS Behavior_Idle);
+    END_RULEBLOCK
+
+    RULEBLOCK Attention_Deplacement
+        AND:MIN;
+        (*ACCU:MAX;*)
+        RULE 3: IF (Senseur_Deplacement IS NOT Arret) THEN (Attention_Deplacement IS Behavior_Deplacement);
+    END_RULEBLOCK
+
+
+    RULEBLOCK Humeur
+        AND:MIN;
+        (*ACCU:MAX;*)
+	RULE 1: IF (Senseur_Batterie IS Vide) THEN (Humeur IS Triste);
+    RULE 2: IF (Senseur_Deplacement IS NOT Arret) THEN (Humeur IS Neutre);
+	RULE 3: IF (Senseur_Deplacement IS Arret) AND (Senseur_Ecoute IS NOT Silence) THEN (Humeur IS Joyeux);
+	RULE 4: IF (Senseur_Deplacement IS Arret) AND (TempsDepuisDerniereAction IS Long) THEN (Humeur IS Triste);
+    END_RULEBLOCK
+
+    RULEBLOCK Energie
+        AND:MIN;
+	OR: MAX;
+        RULE 1: IF (Senseur_Batterie IS Vide) THEN (Energie IS Basse); 
+    END_RULEBLOCK
+ 
+END_FUNCTION_BLOCK

@@ -65,10 +65,10 @@ class ExpressionFaciale:
         print "Reading SNN data from pickle files."
         try:
             # Open the files (_v for voltage and _t for time) 
-            #pk1_v = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Son528Hz_learned_v.pk1", 'rb')
-            #pk1_t = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Son528Hz_learned_t.pk1", 'rb')
-            pk1_v = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Ambiance_learned_v.pk1", 'rb')
-            pk1_t = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Ambiance_learned_t.pk1", 'rb')
+            pk1_v = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Son528Hz_learned_v.pk1", 'rb')
+            pk1_t = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Son528Hz_learned_t.pk1", 'rb')
+            #pk1_v = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Ambiance_learned_v.pk1", 'rb')
+            #pk1_t = open("/home/ubuntu/catkin_ws/src/spike/src/spike/SNN/learned/Ambiance_learned_t.pk1", 'rb')
             # Load the data in some arrays
             data_v = pickle.load(pk1_v)
             data_t = pickle.load(pk1_t)   

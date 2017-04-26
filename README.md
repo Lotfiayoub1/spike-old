@@ -1,2 +1,0 @@
-# spike
-Spike Robot

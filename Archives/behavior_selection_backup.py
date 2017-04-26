@@ -8,8 +8,8 @@ from array import array
 from datetime import timedelta
 from std_msgs.msg import String
 
-rospy.init_node('node_attention', anonymous=True)
-rospy.loginfo("Behavior_attention")
+rospy.init_node('node_selection', anonymous=True)
+rospy.loginfo("Behavior_selection")
 
 verbose = True
 
@@ -144,7 +144,7 @@ if verbose:
 	rospy.loginfo("Chargement du fichier .FCL - Logique floue")
 
 # Initialisation de la logique floue
-fuzzyLogicSystem = fuzzy.storage.fcl.Reader.Reader().load_from_file("/home/ubuntu/catkin_ws/src/spike/src/spike/fcl/attention.fcl")
+fuzzyLogicSystem = fuzzy.storage.fcl.Reader.Reader().load_from_file("/home/ubuntu/catkin_ws/src/spike/src/spike/fcl/selection.fcl")
 
 # Declaration des tableaux de variables entrees et sorties 
 fuzzy_logic_input = {

@@ -28,9 +28,11 @@ mode = modeRecoitRequetes
 
 entree = ""
 
-langue = francais
+langue = anglais
 
 def parle(entree):
+	soundhandle.stopAll()
+	time.sleep(1)
 	if verbose:
 		rospy.loginfo("callback: Message recu: " + entree)
 	if len(entree) > 0: 
@@ -40,7 +42,6 @@ def parle(entree):
 			texte = 'espeak "' + entree + '" -s 100 -p 30' 
 		if verbose:
 			rospy.loginfo(texte)
-		soundhandle.stopAll()
 		os.system(texte)
 		entree = ""
 
