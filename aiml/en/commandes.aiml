@@ -68,12 +68,10 @@
 <pattern>SPIKE PRET</pattern>
 <template>
 <random>
-<li>I'm ready!</li>
-<li>Hello world! I'm ready!</li>
-<li>I'm operational!</li>
-<li>Here I am!</li>
-<li>Ready!</li>
-<li>I'm here!  Ready to go!</li>
+<li>Je suis prêt!</li>
+<li>Bonjour le monde! Je suis prêt!</li>
+<li>Opérationnel!</li>
+<li>Prêt!</li>
 </random>
 </template>
 </category>
@@ -95,12 +93,35 @@
 <pattern>SPIKE</pattern>
 <template>
 <random>
-<li>Yes?</li>
-<li>That's me</li>
-<li>The best robot!</li>
-<li>I'm here.</li>
-<li>What can I do for you?</li>
-<li>Here I am.</li>
+<li>Oui?</li>
+<li>C'est moi!</li>
+<li>Le meilleur robot!</li>
+<li>Je suis là</li>
+<li>Que puis-je faire pour vous?</li>
+</random>
+</template>
+</category>
+
+<category>
+<pattern>BONJOUR</pattern>
+<template>
+<random>
+<li>Bonjour!</li>
+<li>Salut!</li>
+<li>Hey!</li>
+<li>Bonjour à vous!</li>
+<li>Hello!</li>
+</random>
+</template>
+</category>
+
+<category>
+<pattern>PRESENTATION</pattern>
+<template>
+<random>
+<li>Mon nom est Spike!</li>
+<li>Je suis Spike le robot!</li>
+<li>On m'appelle Spike!</li>
 </random>
 </template>
 </category>

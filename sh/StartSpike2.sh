@@ -17,12 +17,4 @@ echo "Kinect..."
 roslaunch freenect_launch freenect.launch &
 sleep 5
 
-echo "Actionneurs..."
-rosrun rosaria RosAria
-sleep 5
-
-echo "Description..."
-
-sleep 5
-
 echo "SPIKE LAUNCHED!"

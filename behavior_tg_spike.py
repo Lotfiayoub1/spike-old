@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 import rospy
 import time
-from geometry_msgs.msg import Twist
+from geometry_msgs.msg import Twist, String
 from sensor_msgs.msg import Joy
 
 rospy.init_node('behavior_tg_spike', anonymous=True)
 pub = rospy.Publisher('/Rosaria/cmd_vel', Twist, queue_size = 10)
+conversation = rospy.Publisher('topic_attention_conversation', String, queue_size = 10)
 #rate = rospy.Rate(5) # hz
 global msg
 msg = Twist()
@@ -26,10 +27,13 @@ def callback(data):
         msg.linear.x = data.axes[4] * multiplicateur
         msg.angular.z = data.axes[3] * multiplicateur
 
-        #vitesse = 0.1
-        #if data.buttons[3] != 0:    # Y: Avance
-        #	rospy.loginfo("Avance")
-        #        msg.linear.x = vitesse
+        if data.buttons[0] != 0:    # A: Bonjour
+        	rospy.loginfo("Salutations!")
+        	conversation.publish("BONJOUR")
+        if data.buttons[1] != 0:    # B: Presentation
+                rospy.loginfo("Presentation")
+           	conversation.publish("PRESENTATION")
+
         #if data.buttons[0] != 0:    # A: Recule
         #        rospy.loginfo("Recule")
         #        msg.linear.x = -vitesse

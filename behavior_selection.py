@@ -68,6 +68,7 @@ rospy.Subscriber("behavior_ecoute/output", String, callbackAssigneTexteEcoute)
 if verbose:
 	rospy.loginfo("Boucle infinie de la selection...")
 
+topic_attention_conversation.publish("SPIKE PRET")
 tempsSleep = 1
 while True:
 

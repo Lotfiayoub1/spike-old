@@ -28,7 +28,7 @@ mode = modeRecoitRequetes
 
 entree = ""
 
-langue = anglais
+langue = francais
 
 def parle(entree):
 	soundhandle.stopAll()
