@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import rospy
 import time
-from geometry_msgs.msg import Twist, String
+from geometry_msgs.msg import Twist
+from std_msgs.msg import String
 from sensor_msgs.msg import Joy
 
 rospy.init_node('behavior_tg_spike', anonymous=True)
@@ -13,7 +14,7 @@ msg = Twist()
 
 
 def callback(data):
-	rospy.loginfo(rospy.get_caller_id() + " recu!")
+	#rospy.loginfo(rospy.get_caller_id() + " recu!")
 	# Saisie joystick
 	msg.linear.x = 0.0
 	msg.linear.y = 0.0
@@ -30,6 +31,7 @@ def callback(data):
         if data.buttons[0] != 0:    # A: Bonjour
         	rospy.loginfo("Salutations!")
         	conversation.publish("BONJOUR")
+
         if data.buttons[1] != 0:    # B: Presentation
                 rospy.loginfo("Presentation")
            	conversation.publish("PRESENTATION")
