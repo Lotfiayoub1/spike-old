@@ -68,10 +68,10 @@
 <pattern>SPIKE PRET</pattern>
 <template>
 <random>
-<li>Je suis prêt!</li>
-<li>Bonjour le monde! Je suis prêt!</li>
-<li>Opérationnel!</li>
-<li>Prêt!</li>
+<li>Je suis pret!</li>
+<li>Bonjour le monde! Je suis pret!</li>
+<li>Operationnel!</li>
+<li>Pret!</li>
 </random>
 </template>
 </category>
@@ -96,7 +96,7 @@
 <li>Oui?</li>
 <li>C'est moi!</li>
 <li>Le meilleur robot!</li>
-<li>Je suis là</li>
+<li>Je suis la!</li>
 <li>Que puis-je faire pour vous?</li>
 </random>
 </template>
@@ -109,7 +109,7 @@
 <li>Bonjour!</li>
 <li>Salut!</li>
 <li>Hey!</li>
-<li>Bonjour à vous!</li>
+<li>Bonjour vous!</li>
 <li>Hello!</li>
 </random>
 </template>

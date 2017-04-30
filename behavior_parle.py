@@ -2,9 +2,10 @@
 import roslib
 import rospy, os, sys
 import time
-import wave
-from sound_play.msg import SoundRequest
-from sound_play.libsoundplay import SoundClient
+#import wave
+import espeak
+#from sound_play.msg import SoundRequest
+#from sound_play.libsoundplay import SoundClient
 from std_msgs.msg import String
 
 #from sound_play.msg import SoundRequest
@@ -13,9 +14,9 @@ from std_msgs.msg import String
 rospy.init_node('node_parle', anonymous=True)
 rospy.loginfo("Behavior_parle")
 
-soundhandle = SoundClient()
-rospy.sleep(1)
-soundhandle.stopAll()
+#soundhandle = SoundClient()
+#rospy.sleep(1)
+#soundhandle.stopAll()
 
 verbose = True
 
@@ -30,19 +31,24 @@ entree = ""
 
 langue = francais
 
+es = espeak.ESpeak(voice='fr-fr', speed=150, pitch=30)
+es.say("Je suis pret.")
+
 def parle(entree):
-	soundhandle.stopAll()
-	time.sleep(1)
+	#soundhandle.stopAll()
+	#time.sleep(1)
 	if verbose:
 		rospy.loginfo("callback: Message recu: " + entree)
 	if len(entree) > 0: 
-		if (langue == francais):
-			texte = 'espeak "' + entree + '" -v french -s 100 -p 30' 
-		else:
-			texte = 'espeak "' + entree + '" -s 100 -p 30' 
-		if verbose:
-			rospy.loginfo(texte)
-		os.system(texte)
+		#if (langue == francais):
+		#	texte = 'espeak "' + entree + '" -v french -s 100 -p 30' 
+		#else:
+		#	texte = 'espeak "' + entree + '" -s 100 -p 30' 
+		#if verbose:
+		#	rospy.loginfo(texte)
+		#os.system(texte)
+		global es
+		es.say(entree)
 		entree = ""
 
 if mode == modeTest:
@@ -58,6 +64,7 @@ if mode == modeRecoitRequetes:
 			rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
 		entree = data.data
 		parle(entree)
+
 
 	if verbose:
 		rospy.loginfo("Enregistrement des callbacks")

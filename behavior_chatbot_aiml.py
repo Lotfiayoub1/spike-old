@@ -19,6 +19,9 @@ modeVocal = 2
 langue = anglais
 mode = modeVocal
 
+dernier = ""
+
+
 # L'objet Kernel est l'interface public pour l'interpreteur AIML. 
 k = aiml.Kernel()
 
@@ -64,13 +67,17 @@ if mode == modeVocal:
 		topic_idle_aiml_template.publish(templateAIML)
 
 	def callbackParle(data):
+		global dernier
 		if verbose:
 			rospy.loginfo(rospy.get_caller_id() + " Message recu: %s", data.data)
 		patternAIML = data.data
-		templateAIML = k.respond(patternAIML)
-		if verbose:
-			rospy.loginfo("Reponse du chatbot: " + templateAIML)
-		topic_parle.publish(templateAIML)
+		if patternAIML != dernier:
+			templateAIML = k.respond(patternAIML)
+			dernier = patternAIML
+			topic_parle.publish(templateAIML)
+			if verbose:
+				rospy.loginfo("Reponse du chatbot: " + templateAIML)
+
 
 	# On souscrit de behavior_attention
 	rospy.Subscriber("topic_attention_conversation", String, callbackParle)
