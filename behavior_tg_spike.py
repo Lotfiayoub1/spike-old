@@ -8,6 +8,8 @@ from sensor_msgs.msg import Joy
 rospy.init_node('behavior_tg_spike', anonymous=True)
 pub = rospy.Publisher('/Rosaria/cmd_vel', Twist, queue_size = 10)
 conversation = rospy.Publisher('topic_attention_conversation', String, queue_size = 10)
+son = rospy.Publisher('topic_joue_son', String, queue_size = 10)
+
 #rate = rospy.Rate(5) # hz
 global msg
 msg = Twist()
@@ -33,15 +35,13 @@ def callback(data):
         	conversation.publish("BONJOUR")
 
         if data.buttons[1] != 0:    # B: Presentation
-                rospy.loginfo("Presentation")
+            rospy.loginfo("Presentation")
            	conversation.publish("PRESENTATION")
 
-        #if data.buttons[0] != 0:    # A: Recule
-        #        rospy.loginfo("Recule")
-        #        msg.linear.x = -vitesse
-        #if data.buttons[2] != 0:    # X: Gauche
-        #        rospy.loginfo("Gauche")
-        #        msg.angular.x = vitesse
+        if data.buttons[2] != 0:    # X: Jouer un son
+            rospy.loginfo("Son")
+            son.publish("EtatEveil")
+                
         #if data.buttons[1] != 0:    # B: Droite
         #        rospy.loginfo("Droite")
         #        msg.angular.x = -vitesse
