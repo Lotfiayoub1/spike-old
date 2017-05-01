@@ -126,5 +126,19 @@
 </template>
 </category>
 
+<category>
+<pattern>ATTENTION</pattern>
+<template>
+<random>
+<li>Attention!</li>
+<li>Attention, je passe!</li>
+<li>Excusez-moi!</li>
+<li>Pardon, laissez-passer!</li>
+<li>Je suis la!</li>
+<li>bip bip!</li>
+</random>
+</template>
+</categorie>
+
 </aiml>
 

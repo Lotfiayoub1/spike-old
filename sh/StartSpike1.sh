@@ -36,7 +36,7 @@ echo "behavior_detecte_ambiance_classe_snn"
 echo "behavior_selection"
 xterm -e "rosrun spike behavior_selection.py" &
 #export DISPLAY=':0'
-#echo "behavior_humeur"
-#xterm -e "rosrun spike behavior_humeur.py" &
+echo "behavior_humeur"
+xterm -e "rosrun spike behavior_humeur.py" &
 
 echo "SPIKE LAUNCHED!"
