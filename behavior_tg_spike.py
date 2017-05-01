@@ -35,12 +35,12 @@ def callback(data):
         	conversation.publish("BONJOUR")
 
         if data.buttons[1] != 0:    # B: Presentation
-            rospy.loginfo("Presentation")
+            	rospy.loginfo("Presentation")
            	conversation.publish("PRESENTATION")
 
         if data.buttons[2] != 0:    # X: Jouer un son
-            rospy.loginfo("Son")
-            son.publish("EtatEveil")
+            	rospy.loginfo("Son")
+            	son.publish("EtatEveil")
                 
         #if data.buttons[1] != 0:    # B: Droite
         #        rospy.loginfo("Droite")
