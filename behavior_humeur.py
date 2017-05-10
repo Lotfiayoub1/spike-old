@@ -3,7 +3,7 @@
 import rospy, numpy, math
 #import pygtk
 #pygtk.require('2.0')
-#from mpltools import style
+#from mpltools import style 
 import gtk
 
 from std_msgs.msg import String
@@ -29,7 +29,7 @@ delais = 5000    # va rafraichir toutes les x millisecondes.
 
 # Plot
 temps_max = 150
-figure = Figure(figsize=(1280,125))
+figure = Figure(figsize=(800,125))
 figure.patch.set_facecolor('black')
 ax = figure.add_subplot(111, facecolor='black')
 line, = ax.plot(0,2)
@@ -113,7 +113,7 @@ class ExpressionFaciale:
     pix_pensee_reflexion3 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion3.gif")
     pix_pensee_reflexion4 = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/pensees/penseeReflexion4.gif")
 
-    pix_humeur_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurNeutre.jpeg")
+    pix_humeur_neutre = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurNeutre.png")
     pix_humeur_joyeux = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurJoyeux.png")
     pix_humeur_fatigue = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurFatigue.gif")
     pix_humeur_triste = gtk.gdk.PixbufAnimation("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurTriste.gif")
@@ -218,7 +218,7 @@ class ExpressionFaciale:
         self.window.set_title("SPIKE")
     
         #self.window.fullscreen()
-        self.window.resize(800, 480)
+        self.window.resize(600, 480)
         
         #fixed = gtk.Fixed()
         #fixed.set_size_request(1280, 1024)
@@ -235,11 +235,12 @@ class ExpressionFaciale:
         #self.window.add(self.imageHumeur)
         #self.window.add(self.statut)
         
+        #JSD: REACTIVER LES LIGNES COMMENTES POUR AVOIR LES AUTRES ELEMENTS.  MAIS REDUIRE LA TAILLE DU FILLER. 
         vbox = gtk.VBox(False, 0)
-        vbox.pack_start(self.plotCanevas)
+        #vbox.pack_start(self.plotCanevas)
         vbox.pack_start(self.imageHumeur, False, False)
-        vbox.pack_start(self.imageFiller, False, False)
-        vbox.pack_start(self.statut)
+        #vbox.pack_start(self.imageFiller, False, False)
+        #vbox.pack_start(self.statut)
 
         self.window.add(vbox)
         self.window.show_all()
