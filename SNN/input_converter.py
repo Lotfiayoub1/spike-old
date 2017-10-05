@@ -20,12 +20,12 @@ rospy.loginfo("Input converter for SNN topics")
 # Retriving parameters from launcher
 verbose = rospy.get_param("/input_converter/verbose") 
 SNNname = rospy.get_param("/input_converter/SNNname")
-sensory_neurons = rospy.get_param("/input_converter/sensory_neurons")
+topics_to_convert = rospy.get_param("/input_converter/topics_to_convert")
 p_topic = []
 p_type = []
 p_field = []
 out_topic = []
-for x in range (0, sensory_neurons):
+for x in range (0, topics_to_convert):
     p_topic.append(rospy.get_param("/input_converter/input_topic_"+str(x+1))) 
     p_type.append(rospy.get_param("/input_converter/topic_type_"+str(x+1)))
     p_field.append(rospy.get_param("/input_converter/input_field_"+str(x+1)))
@@ -41,7 +41,7 @@ def callback(data, neuron_nb):
 if verbose:
     rospy.loginfo("Mapping and converting topics for sensory inputs of the SNN.  Do NOT interrupt while SNN execute. ")
 
-for x in range (0, sensory_neurons):
+for x in range (0, topics_to_convert):
     rospy.Subscriber(p_topic[x], eval(p_type[x]) , callback, x)
     out_topic.append(rospy.Publisher('topic_in_SNN_'+SNNname+'_'+str(x+1), String, queue_size=10))
     #print "Declaration du topic " + str(x)

@@ -17,7 +17,7 @@ modeClavier = 1
 modeVocal = 2
 
 langue = anglais
-mode = modeVocal
+mode = modeClavier
 
 dernier = ""
 
@@ -33,11 +33,11 @@ if verbose:
 
 if langue == anglais:
 	# Version anglaise
-	k.learn("/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/startup.xml")
+	k.learn("/home/pi/ros_catkin_ws/src/spike/src/spike/aiml/en/startup.xml")
 	k.respond("LOAD AIML ENGLISH")
 else:
 	# Version francaise
-	k.learn("/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/fr/startup.xml") 
+	k.learn("/home/pi/ros_catkin_ws/src/spike/src/spike/aiml/fr/startup.xml") 
 	k.respond("LOAD AIML FRENCH")
 	
 if verbose:

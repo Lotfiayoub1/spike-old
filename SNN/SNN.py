@@ -77,6 +77,8 @@ RUN = 1
 topics_motor_volts = []
 topics_motor_spikes = []
 
+sensory_count = 0
+
 # Global variable that receives the frames from the topic.
 frames_in = [sensory_neurons]
 for x in range(0, sensory_neurons):
@@ -86,13 +88,17 @@ for x in range(0, sensory_neurons):
 def init_frames_in():
     for x in range(0, sensory_neurons):
         frames_in[x] = 0.0
+    global sensory_count
+    sensory_count = 0 
 
 # Callback triggered when there is a new message on the topic.
 def callbackReceiveMsgFromTopic(data, sensory_nb):
+    global sensory_count
     #rospy.loginfo("Received in the callback: %s", data.data)
     valeur = float(data.data) 
     if valeur != 0:
         frames_in[sensory_nb] = valeur
+    sensory_count = sensory_count + 1
 
 # Display time.  Must be called in the main SNN loop. 
 def display_chrono(start, label):        
@@ -176,9 +182,12 @@ def SNN():
                 #synapses.append(Synapses(neurons[layer-1], neurons[layer], ""))  # Synaptic weight has been change in the training mode
 
             # A delay is defined to better visualize graphics (no line overlapping).      
-            synapses[layer-1].delay = 'synapse_number*'+synapse_delay+'*ms'
+            #synapses[layer-1].delay = 'synapse_number*'+synapse_delay+'*ms'
             # Connextion type between layers.
-            synapses[layer-1].connect(condition=synapse_condition) 
+            if synapse_condition != "":
+                synapses[layer-1].connect(condition=synapse_condition) 
+            else:
+                synapses[layer-1].connect() 
             if verbose: 
                 rospy.loginfo("Assigning SYNAPSES between layer: " + str(layer-1) + " and layer " + str(layer))
 
@@ -224,7 +233,9 @@ def SNN():
         
         # When the callback function has received all the input neurons, assign those neurons to the input layer. 
         frames_assignation = frames_in
-        rospy.loginfo("Assigned sensories: " + str(frames_assignation))
+        #rospy.loginfo("Assigned sensories: " + str(frames_assignation))
+        global sensory_count
+        rospy.loginfo("Sensory count: " + str(sensory_count))
 
         # Assing sensory neurons from frames              
         for k in range(0,sensory_neurons): 
@@ -248,8 +259,8 @@ def SNN():
         if mode == RUN:
             # Publish on the output topic
             for y in range(0, motor_neurons):
-                #rospy.loginfo("Values to publish for neuron " + str(y) + " : " + str(len(stateMotor.v[y])))
-                #rospy.loginfo("Number of spikes: " + str(spikeMonitor.num_spikes))
+                rospy.loginfo("Values to publish for neuron " + str(y) + " : " + str(len(stateMotor.v[y])))
+                rospy.loginfo("Number of spikes: " + str(spikeMonitor.num_spikes))
                 # publish volts
                 voltsToPublish = Float32MultiArray()
                 voltsToPublish.data = stateMotor.v[y]

@@ -19,7 +19,7 @@ iTime = 0
 # Plot
 # Petit ecran Spike: 600 X 480
 temps_max = 600
-img_neutre = mpimg.imread("/home/ubuntu/catkin_ws/src/spike/src/spike/images/humeurs/humeurNeutre.png")
+img_neutre = mpimg.imread("/home/pi/ros_catkin_ws/src/spike/src/spike/images/humeurs/humeurNeutre.png")
 mpl.rcParams['toolbar'] = 'None'
 figsize = mpl.rcParams['figure.figsize']
 figsize[0] = 8

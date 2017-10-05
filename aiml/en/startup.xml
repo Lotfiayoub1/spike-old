@@ -6,7 +6,7 @@
 <template>
 
 <!-- Load standard AIML set -->
-<learn>/home/ubuntu/catkin_ws/src/spike/src/spike/aiml/en/commandes.aiml</learn>
+<learn>/home/pi/ros_catkin_ws/src/spike/src/spike/aiml/en/commandes.aiml</learn>
 </template>
 </category>
 
