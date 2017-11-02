@@ -43,7 +43,7 @@ if verbose:
 
 for x in range (0, topics_to_convert):
     rospy.Subscriber(p_topic[x], eval(p_type[x]) , callback, x)
-    out_topic.append(rospy.Publisher('topic_in_SNN_'+SNNname+'_'+str(x+1), String, queue_size=10))
+    out_topic.append(rospy.Publisher('topic_in_SNN_'+SNNname+'_'+str(x+1), String, queue_size=1))
     #print "Declaration du topic " + str(x)
 
 rospy.spin()
